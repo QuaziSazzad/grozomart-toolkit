@@ -140,7 +140,7 @@ $this->add_control(
 		'type' => \Elementor\Controls_Manager::REPEATER,
 		'fields' => $middle_links->get_controls(),
 		'default' => [
-			['link_label' => esc_html__('My Account', 'grozomart-toolkit'), 'link_url' => ['url' => wc_get_page_permalink('myaccount')]],
+			['link_label' => esc_html__('My Account', 'grozomart-toolkit'), 'link_url' => ['url' => function_exists('wc_get_page_permalink') ? wc_get_page_permalink('myaccount') : '#']],
 			['link_label' => esc_html__('Wishlist', 'grozomart-toolkit')],
 			['link_label' => esc_html__('FAQs', 'grozomart-toolkit')],
 			['link_label' => esc_html__('Order Tracking', 'grozomart-toolkit')],

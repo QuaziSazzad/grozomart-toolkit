@@ -148,6 +148,19 @@ function grozomart_kses_basic($string = '')
  */
 function grozomart_select_category($category = 'category')
 {
+	/**
+	 * Elementor's editor calls this once per widget instance per panel
+	 * render (register_controls() re-runs a lot), and the Product widget
+	 * alone calls it 11 times across its layouts — without memoizing,
+	 * every one of those re-runs get_terms() from scratch in the same
+	 * request, which is what was making the editor hang/spin.
+	 */
+	static $cache = [];
+
+	if (isset($cache[$category])) {
+		return $cache[$category];
+	}
+
 	$terms = get_terms([
 		'taxonomy'   => $category,
 		'hide_empty' => true,
@@ -161,6 +174,8 @@ function grozomart_select_category($category = 'category')
 		}
 	}
 
+	$cache[$category] = $options;
+
 	return $options;
 }
 
@@ -169,21 +184,29 @@ function grozomart_select_category($category = 'category')
  */
 function grozomart_select_post($post_type = 'post')
 {
+	// See grozomart_select_category() above for why this is memoized.
+	static $cache = [];
+
+	if (isset($cache[$post_type])) {
+		return $cache[$post_type];
+	}
+
 	$args = [
 		'post_type'      => $post_type,
 		'posts_per_page' => -1,
 		'orderby'        => 'date',
 		'order'          => 'DESC',
+		'fields'         => 'ids',
 	];
 
-	$query_query = get_posts($args);
-	$posts       = [];
+	$post_ids = get_posts($args);
+	$posts    = [];
 
-	if ($query_query) {
-		foreach ($query_query as $query) {
-			$posts[$query->ID] = $query->post_title;
-		}
+	foreach ($post_ids as $post_id) {
+		$posts[$post_id] = get_the_title($post_id);
 	}
+
+	$cache[$post_type] = $posts;
 
 	return $posts;
 }
