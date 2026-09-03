@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("../webfonts/flaticon.woff2?c09806ea6d61660dbf763f2e2a960b6f") format("woff2"),
+url("../webfonts/flaticon.woff?c09806ea6d61660dbf763f2e2a960b6f") format("woff"),
+url("../webfonts/flaticon.eot?c09806ea6d61660dbf763f2e2a960b6f#iefix") format("embedded-opentype"),
+url("../webfonts/flaticon.ttf?c09806ea6d61660dbf763f2e2a960b6f") format("truetype"),
+url("../webfonts/flaticon.svg?c09806ea6d61660dbf763f2e2a960b6f#flaticon_grozomart") format("svg")
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before, span[class^="flaticon-"]:before, span[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-add-to-cart:before {
+    content: "\f101";
+}
+.flaticon-star:before {
+    content: "\f102";
+}
+.flaticon-phone:before {
+    content: "\f103";
+}
+.flaticon-bio:before {
+    content: "\f104";
+}
+.flaticon-leaves:before {
+    content: "\f105";
+}
+.flaticon-no-chemical:before {
+    content: "\f106";
+}
+.flaticon-credit-card:before {
+    content: "\f107";
+}
+.flaticon-customer-support:before {
+    content: "\f108";
+}
+
