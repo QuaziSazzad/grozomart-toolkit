@@ -8,7 +8,7 @@ class Sliding_Text extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-sliding-text';
+		return 'grozomart-sliding-text';
 	}
 
 	public function get_title()

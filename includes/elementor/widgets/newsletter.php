@@ -9,7 +9,7 @@ class Newsletter extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-newsletter';
+		return 'grozomart-newsletter';
 	}
 
 	public function get_title()

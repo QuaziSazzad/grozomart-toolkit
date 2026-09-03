@@ -671,13 +671,8 @@
         $('.latest-work-item.active .normal-area').hide();
 
 
-        // ## Preloader
-        function handlePreloader() {
-            if ($('.preloader').length) {
-                $('.preloader').delay(200).fadeOut(500);
-            }
-        }
-        handlePreloader();
+        // ## Preloader is handled by the theme (theme.js) so it still hides
+        // when this plugin is deactivated.
 
     });
 

@@ -22,17 +22,17 @@ class Posts
 
 	public function render($settings, $carousel_navigation_html = '')
 	{
-		$wrapper = 'tekprof-recent-posts';
+		$wrapper = 'grozomart-recent-posts';
 
 		if ('carousel' === $settings['layout']) {
-			$wrapper .= ' tekprof-carousel-wrapper';
+			$wrapper .= ' grozomart-carousel-wrapper';
 		}
 ?>
 		<div class="<?php echo esc_attr($wrapper); ?>">
 			<?php if ('grid' == $settings['layout']) : ?>
 				<?php $this->render_loop($settings); ?>
 			<?php elseif ('carousel' == $settings['layout']) : ?>
-				<div class="tekprof-carousel-active">
+				<div class="grozomart-carousel-active">
 					<?php $this->render_loop($settings); ?>
 				</div>
 				<?php if ($carousel_navigation_html) {
@@ -77,7 +77,7 @@ class Posts
 			if ('grid' == $settings['layout']) :
 				$this->render_post_item($settings);
 			elseif ('carousel' == $settings['layout']) : ?>
-				<div class="tekprof-carousel-item">
+				<div class="grozomart-carousel-item">
 					<?php $this->render_post_item($settings); ?>
 				</div>
 		<?php endif;

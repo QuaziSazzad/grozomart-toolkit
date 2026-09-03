@@ -19,7 +19,7 @@ if (! defined('ABSPATH')) {
     <?php wp_head(); ?>
 
     <style>
-        .tekprof-popup-wrapper .elementor-section-wrap:not(:empty)+#elementor-add-new-section {
+        .grozomart-popup-wrapper .elementor-section-wrap:not(:empty)+#elementor-add-new-section {
             display: none;
         }
 

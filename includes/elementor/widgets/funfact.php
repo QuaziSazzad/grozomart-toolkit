@@ -8,7 +8,7 @@ class FunFact extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-funfact';
+		return 'grozomart-funfact';
 	}
 
 	public function get_title()

@@ -12,7 +12,7 @@ class Header extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-header';
+		return 'grozomart-header';
 	}
 
 	public function get_title()

@@ -9,7 +9,7 @@ class Footer_Newsletter extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-footer-newsletter';
+		return 'grozomart-footer-newsletter';
 	}
 
 	public function get_title()

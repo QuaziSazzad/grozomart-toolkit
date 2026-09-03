@@ -38,7 +38,7 @@ if (! defined('ABSPATH')) {
     }
 
     ?>
-    <div class="tekprof-offcanvas-wrapper">
+    <div class="grozomart-offcanvas-wrapper">
         <div class="offcanvas-overly"></div>
         <div class="offcanvas-container" style="width: <?php echo esc_attr($width) ?>px;">
             <div class="offcanvas-close"><i class="fal fa-times"></i></div>

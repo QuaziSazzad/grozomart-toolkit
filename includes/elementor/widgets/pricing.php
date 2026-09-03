@@ -9,7 +9,7 @@ class Pricing extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-pricing';
+		return 'grozomart-pricing';
 	}
 
 	public function get_title()

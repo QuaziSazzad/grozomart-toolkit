@@ -8,7 +8,7 @@ class Integrating extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-integrating';
+		return 'grozomart-integrating';
 	}
 
 	public function get_title()

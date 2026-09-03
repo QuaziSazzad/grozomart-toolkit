@@ -8,7 +8,7 @@ class Portfolio_Details extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-portfolio-details';
+		return 'grozomart-portfolio-details';
 	}
 
 	public function get_title()

@@ -10,7 +10,7 @@ class Call_To_Action extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-call-to-action';
+		return 'grozomart-call-to-action';
 	}
 
 	public function get_title()

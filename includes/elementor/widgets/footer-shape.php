@@ -9,7 +9,7 @@ class Footer_Shape extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-footer-shape';
+		return 'grozomart-footer-shape';
 	}
 
 	public function get_title()

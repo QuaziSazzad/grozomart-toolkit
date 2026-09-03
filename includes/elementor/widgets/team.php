@@ -9,7 +9,7 @@ class Team extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-team';
+		return 'grozomart-team';
 	}
 
 	public function get_title()

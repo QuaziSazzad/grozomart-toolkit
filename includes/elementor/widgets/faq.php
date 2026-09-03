@@ -10,7 +10,7 @@ class Faq extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-faq';
+		return 'grozomart-faq';
 	}
 
 	public function get_title()

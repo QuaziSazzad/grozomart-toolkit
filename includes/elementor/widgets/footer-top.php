@@ -8,7 +8,7 @@ class Footer_Top extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-footer-top';
+		return 'grozomart-footer-top';
 	}
 
 	public function get_title()

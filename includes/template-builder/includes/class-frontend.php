@@ -174,7 +174,7 @@ class Template_Frontend
 			$id = $this->header_id;
 			if ($id) {
 			?>
-				<header class="tekprof-site-header">
+				<header class="grozomart-site-header">
 					<?php echo self::get_elementor_content($id); ?>
 				</header>
 			<?php
@@ -184,7 +184,7 @@ class Template_Frontend
 			$id = $this->footer_id;
 			if ($id) {
 			?>
-				<footer class="tekprof-site-footer">
+				<footer class="grozomart-site-footer">
 					<?php echo self::get_elementor_content($id); ?>
 				</footer>
 		<?php
@@ -237,9 +237,9 @@ class Template_Frontend
 		$delay           = '';
 
 		if ($editing) {
-			$wrapper_class = 'tekprof-popup-wrapper show-popup editing';
+			$wrapper_class = 'grozomart-popup-wrapper show-popup editing';
 		} else {
-			$wrapper_class = 'tekprof-popup-wrapper';
+			$wrapper_class = 'grozomart-popup-wrapper';
 		}
 
 		if (is_array($meta)) {

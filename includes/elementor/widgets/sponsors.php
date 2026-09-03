@@ -8,7 +8,7 @@ class Sponsors extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-sponsors';
+		return 'grozomart-sponsors';
 	}
 
 	public function get_title()

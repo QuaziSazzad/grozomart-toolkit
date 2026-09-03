@@ -10,7 +10,7 @@ class Video extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-video';
+		return 'grozomart-video';
 	}
 
 	public function get_title()

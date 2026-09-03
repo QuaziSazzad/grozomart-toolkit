@@ -16,7 +16,7 @@ class About extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-about';
+		return 'grozomart-about';
 	}
 
 	public function get_title()

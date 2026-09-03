@@ -8,7 +8,7 @@ class Testimonial extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-testimonial';
+		return 'grozomart-testimonial';
 	}
 
 	public function get_title()

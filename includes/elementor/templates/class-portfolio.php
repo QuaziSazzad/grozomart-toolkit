@@ -20,10 +20,10 @@ class Portfolio
 
 	public function render($settings, $carousel_navigation_html)
 	{
-		$wrapper = ['tekprof-portfolio-items'];
+		$wrapper = ['grozomart-portfolio-items'];
 
 		if ('carousel' == $settings['layout']) {
-			$wrapper[] = 'tekprof-carousel-wrapper';
+			$wrapper[] = 'grozomart-carousel-wrapper';
 		}
 
 		$wrapper[] = $settings['design'];
@@ -33,7 +33,7 @@ class Portfolio
 			<?php if ('grid' == $settings['layout']) : ?>
 				<?php $this->render_loop($settings); ?>
 			<?php elseif ('carousel' == $settings['layout']) : ?>
-				<div class="tekprof-carousel-active">
+				<div class="grozomart-carousel-active">
 					<?php $this->render_loop($settings); ?>
 				</div>
 				<?php if ($carousel_navigation_html) {
@@ -75,7 +75,7 @@ class Portfolio
 			if ('grid' == $settings['layout']) :
 				$this->render_portfolio_item($settings);
 			elseif ('carousel' == $settings['layout']) : ?>
-				<div class="tekprof-carousel-item">
+				<div class="grozomart-carousel-item">
 					<?php $this->render_portfolio_item($settings); ?>
 				</div>
 		<?php endif;

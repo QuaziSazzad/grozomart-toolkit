@@ -16,7 +16,7 @@ class Working_Process extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-working-process';
+		return 'grozomart-working-process';
 	}
 
 	public function get_title()

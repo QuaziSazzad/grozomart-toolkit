@@ -16,7 +16,7 @@ class Features extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-features';
+		return 'grozomart-features';
 	}
 
 	public function get_title()

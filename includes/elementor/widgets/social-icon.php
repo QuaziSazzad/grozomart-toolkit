@@ -9,7 +9,7 @@ class Social_Icon extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-social-icon';
+		return 'grozomart-social-icon';
 	}
 
 	public function get_title()

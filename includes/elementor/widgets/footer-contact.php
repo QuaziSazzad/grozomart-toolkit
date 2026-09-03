@@ -16,7 +16,7 @@ class Footer_Contact extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-footer-contact';
+		return 'grozomart-footer-contact';
 	}
 
 	public function get_title()

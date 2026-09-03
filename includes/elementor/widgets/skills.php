@@ -8,7 +8,7 @@ class Skills extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-skills';
+		return 'grozomart-skills';
 	}
 
 	public function get_title()

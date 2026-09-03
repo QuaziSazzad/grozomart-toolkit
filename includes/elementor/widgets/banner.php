@@ -10,7 +10,7 @@ class Banner extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-banner';
+		return 'grozomart-banner';
 	}
 
 	public function get_title()

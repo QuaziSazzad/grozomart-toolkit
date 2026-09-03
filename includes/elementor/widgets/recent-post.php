@@ -12,7 +12,7 @@ class Recent_Post extends Widget_Base
 
 	public function get_name()
 	{
-		return 'tekprof-recent-post';
+		return 'grozomart-recent-post';
 	}
 
 	public function get_title()

@@ -16,7 +16,7 @@ class Footer_About extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-footer-about';
+		return 'grozomart-footer-about';
 	}
 
 	public function get_title()

@@ -8,7 +8,7 @@ class Service extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-service';
+		return 'grozomart-service';
 	}
 
 	public function get_title()

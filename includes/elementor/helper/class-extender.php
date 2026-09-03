@@ -262,7 +262,7 @@ class Grozomart_Elementor_Extender
 					'section_sticky_on' => 'yes',
 				],
 				'selectors' => [
-					'{{WRAPPER}}.tekprof-sticky-section.tekprof-sticky-active' => 'top: {{SIZE}}px;',
+					'{{WRAPPER}}.grozomart-sticky-section.grozomart-sticky-active' => 'top: {{SIZE}}px;',
 				],
 			]
 		);
@@ -273,7 +273,7 @@ class Grozomart_Elementor_Extender
 				'label'     => esc_html__('Active Background Color', 'grozomart-toolkit'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}}.tekprof-sticky-section.tekprof-sticky-active' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}}.grozomart-sticky-section.grozomart-sticky-active' => 'background-color: {{VALUE}};',
 				],
 				'condition' => [
 					'section_sticky_on' => 'yes',
@@ -288,7 +288,7 @@ class Grozomart_Elementor_Extender
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'custom'],
 				'selectors'  => [
-					'{{WRAPPER}}.tekprof-sticky-section.tekprof-sticky-active' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}}.grozomart-sticky-section.grozomart-sticky-active' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'section_sticky_on' => 'yes',
@@ -301,7 +301,7 @@ class Grozomart_Elementor_Extender
 			[
 				'name'     => 'section_sticky_border',
 				'label'    => esc_html__('Border', 'replace-text-domain'),
-				'selector' => '{{WRAPPER}}.tekprof-sticky-section.tekprof-sticky-active',
+				'selector' => '{{WRAPPER}}.grozomart-sticky-section.grozomart-sticky-active',
 			]
 		);
 
@@ -312,7 +312,7 @@ class Grozomart_Elementor_Extender
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'custom'],
 				'selectors'  => [
-					'{{WRAPPER}}.tekprof-sticky-section.tekprof-sticky-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}}.grozomart-sticky-section.grozomart-sticky-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'condition'  => [
 					'section_sticky_on' => 'yes',
@@ -325,7 +325,7 @@ class Grozomart_Elementor_Extender
 			[
 				'label'     => esc_html__('Active Box Shadow', 'grozomart-toolkit'),
 				'name'      => 'section_sticky_shadow',
-				'selector'  => '{{WRAPPER}}.tekprof-sticky-section.tekprof-sticky-active',
+				'selector'  => '{{WRAPPER}}.grozomart-sticky-section.grozomart-sticky-active',
 				'condition' => [
 					'section_sticky_on' => 'yes',
 				],
@@ -340,7 +340,7 @@ class Grozomart_Elementor_Extender
 		$settings = $element->get_settings_for_display();
 
 		if (! empty($settings['section_sticky_on']) == 'yes') {
-			$element->add_render_attribute('_wrapper', 'class', 'tekprof-sticky-section');
+			$element->add_render_attribute('_wrapper', 'class', 'grozomart-sticky-section');
 		}
 	}
 

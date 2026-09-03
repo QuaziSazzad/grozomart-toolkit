@@ -9,7 +9,7 @@ class Contact extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-contact';
+		return 'grozomart-contact';
 	}
 
 	public function get_title()

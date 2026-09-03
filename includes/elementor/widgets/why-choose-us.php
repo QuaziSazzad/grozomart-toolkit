@@ -16,7 +16,7 @@ class Why_Choose_Us extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-why-choose-us';
+		return 'grozomart-why-choose-us';
 	}
 
 	public function get_title()

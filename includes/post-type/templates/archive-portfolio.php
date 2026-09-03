@@ -27,7 +27,7 @@ $options = [
 	<div class="content-area">
 		<div class="portfolio-archive-content">
 			<?php if (have_posts()): ?>
-				<div class="tekprof-portfolio-items layout-grid <?php echo esc_attr($options['design']) ?>">
+				<div class="grozomart-portfolio-items layout-grid <?php echo esc_attr($options['design']) ?>">
 					<?php
 					while (have_posts()): the_post();
 						Portfolio::instance()->render_portfolio_item($options);

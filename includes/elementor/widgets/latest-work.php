@@ -9,7 +9,7 @@ class Latest_Work extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-latest-work';
+		return 'grozomart-latest-work';
 	}
 
 	public function get_title()

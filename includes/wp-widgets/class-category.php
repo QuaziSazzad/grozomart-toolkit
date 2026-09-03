@@ -12,7 +12,7 @@ class Grozomart_Categories extends WP_Widget
 	public function __construct()
 	{
 		$widget_ops = array(
-			'classname'   => 'tekprof-wp-categories widget-category',
+			'classname'   => 'grozomart-wp-categories widget-category',
 			'description' => __('A custom widget to display categories with post counts', 'grozomart-toolkit')
 		);
 

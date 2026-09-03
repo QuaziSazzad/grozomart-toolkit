@@ -380,7 +380,7 @@ trait Carousel_Helper
 				],
 				'separator'  => 'before',
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-active' => '--grid-gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-active' => '--grid-gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -479,7 +479,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows' => '--arrow-h-p: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows' => '--arrow-h-p: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'arrow_position_toggle' => 'yes',
@@ -507,7 +507,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows' => '--arrow-v-p: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows' => '--arrow-v-p: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'arrow_position_toggle' => 'yes',
@@ -532,7 +532,7 @@ trait Carousel_Helper
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows' => '--arrow-space: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows' => '--arrow-space: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -557,7 +557,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows' => '--transform-x: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows' => '--transform-x: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'arrow_position_toggle' => 'yes',
@@ -586,7 +586,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-arrows' => '--transform-y: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows' => '--transform-y: {{SIZE}}{{UNIT}};',
 				],
 				'condition' => [
 					'arrow_position_toggle' => 'yes',
@@ -609,7 +609,7 @@ trait Carousel_Helper
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -627,7 +627,7 @@ trait Carousel_Helper
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow' => 'height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -637,7 +637,7 @@ trait Carousel_Helper
 			[
 				'name'      => 'arrow_typography',
 				'label'     => esc_html__('Typography', 'grozomart-toolkit'),
-				'selector'  => '{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow',
+				'selector'  => '{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow',
 				'condition' => [
 					'arrow_type' => ['text', 'text_icons']
 				]
@@ -671,7 +671,7 @@ trait Carousel_Helper
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows i, {{WRAPPER}} .tekprof-carousel-arrows svg' => 'font-size: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows i, {{WRAPPER}} .grozomart-carousel-arrows svg' => 'font-size: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'icon_style_toggle' => 'yes',
@@ -692,7 +692,7 @@ trait Carousel_Helper
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-prev-arrow i, {{WRAPPER}} .tekprof-prev-arrow svg' => 'transform: rotate({{SIZE}}deg);',
+					'{{WRAPPER}} .grozomart-prev-arrow i, {{WRAPPER}} .grozomart-prev-arrow svg' => 'transform: rotate({{SIZE}}deg);',
 				],
 				'condition' => [
 					'icon_style_toggle' => 'yes',
@@ -713,7 +713,7 @@ trait Carousel_Helper
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-next-arrow i, {{WRAPPER}} .tekprof-next-arrow svg' => 'transform: rotate({{SIZE}}deg);',
+					'{{WRAPPER}} .grozomart-next-arrow i, {{WRAPPER}} .grozomart-next-arrow svg' => 'transform: rotate({{SIZE}}deg);',
 				],
 				'condition' => [
 					'icon_style_toggle' => 'yes',
@@ -734,7 +734,7 @@ trait Carousel_Helper
 					'900' => esc_html__('Solid', 'grozomart-toolkit'),
 				],
 				'selectors'   => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow i' => 'font-weight: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow i' => 'font-weight: {{VALUE}};',
 				],
 				'condition'   => [
 					'icon_style_toggle' => 'yes',
@@ -748,7 +748,7 @@ trait Carousel_Helper
 			Group_Control_Border::get_type(),
 			[
 				'name'     => 'arrow_border',
-				'selector' => '{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow',
+				'selector' => '{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow',
 			]
 		);
 
@@ -759,7 +759,7 @@ trait Carousel_Helper
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em', 'custom'],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}}; overflow: hidden;',
 				],
 			]
 		);
@@ -779,7 +779,7 @@ trait Carousel_Helper
 				'label'     => esc_html__('Color', 'grozomart-toolkit'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -790,7 +790,7 @@ trait Carousel_Helper
 				'label'     => esc_html__('Background Color', 'grozomart-toolkit'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -810,7 +810,7 @@ trait Carousel_Helper
 				'label'     => esc_html__('Color', 'grozomart-toolkit'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -821,7 +821,7 @@ trait Carousel_Helper
 				'label'     => esc_html__('Background Color', 'grozomart-toolkit'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -835,7 +835,7 @@ trait Carousel_Helper
 					'arrow_border_border!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-arrows .slick-arrow:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-arrows .slick-arrow:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -927,7 +927,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots' => '--dots-h-p: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots' => '--dots-h-p: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'dots_position_toggle' => 'yes',
@@ -955,7 +955,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots' => '--dots-v-p: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots' => '--dots-v-p: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'dots_position_toggle' => 'yes',
@@ -979,7 +979,7 @@ trait Carousel_Helper
 					],
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots .slick-dots' => 'gap: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots .slick-dots' => 'gap: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1004,7 +1004,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots' => '--transform-x: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots' => '--transform-x: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'dots_position_toggle' => 'yes',
@@ -1032,7 +1032,7 @@ trait Carousel_Helper
 					'unit' => '%',
 				],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots' => '--transform-y: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots' => '--transform-y: {{SIZE}}{{UNIT}};',
 				],
 				'condition'  => [
 					'dots_position_toggle' => 'yes',
@@ -1049,7 +1049,7 @@ trait Carousel_Helper
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots li' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots li' => 'width: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1061,7 +1061,7 @@ trait Carousel_Helper
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => ['px'],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots li' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots li' => 'height: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -1073,7 +1073,7 @@ trait Carousel_Helper
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => ['px', '%', 'em', 'custom'],
 				'selectors'  => [
-					'{{WRAPPER}} .tekprof-carousel-dots li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .grozomart-carousel-dots li' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -1093,7 +1093,7 @@ trait Carousel_Helper
 				'label'     => esc_html__('Color', 'grozomart-toolkit'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-dots .slick-dots li' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-dots .slick-dots li' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1113,7 +1113,7 @@ trait Carousel_Helper
 				'label'     => esc_html__('Color', 'grozomart-toolkit'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .tekprof-carousel-dots .slick-dots li:hover, {{WRAPPER}} .tekprof-carousel-dots .slick-dots li.slick-active' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .grozomart-carousel-dots .slick-dots li:hover, {{WRAPPER}} .grozomart-carousel-dots .slick-dots li.slick-active' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -1135,8 +1135,8 @@ trait Carousel_Helper
 		$settings = $this->get_settings_for_display();
 
 		if ('yes' === $settings['show_arrows'] && 'unique_ids' != $settings['arrow_type']): ?>
-			<div class="tekprof-carousel-arrows <?php echo esc_attr($settings['arrow_position']) ?>">
-				<div class="tekprof-prev-arrow" role="button">
+			<div class="grozomart-carousel-arrows <?php echo esc_attr($settings['arrow_position']) ?>">
+				<div class="grozomart-prev-arrow" role="button">
 					<?php
 					if ($settings['arrow_prev_icon'] && ('icons' != $settings['arrow_type'] || 'text_icons' != $settings['arrow_type'])) {
 						Icons_Manager::render_icon($settings['arrow_prev_icon']);
@@ -1147,7 +1147,7 @@ trait Carousel_Helper
 					}
 					?>
 				</div>
-				<div class="tekprof-next-arrow" role="button">
+				<div class="grozomart-next-arrow" role="button">
 					<?php
 					if ($settings['arrow_next_text'] && ('text' != $settings['arrow_type'] || 'text_icons' != $settings['arrow_type'])) {
 						echo esc_html($settings['arrow_next_text']);
@@ -1161,7 +1161,7 @@ trait Carousel_Helper
 			</div>
 		<?php endif;
 		if ('yes' === $settings['show_dots']): ?>
-			<div class="tekprof-carousel-dots <?php echo esc_attr($settings['dots_position']) ?>"></div>
+			<div class="grozomart-carousel-dots <?php echo esc_attr($settings['dots_position']) ?>"></div>
 <?php endif;
 	}
 }

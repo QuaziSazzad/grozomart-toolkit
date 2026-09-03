@@ -9,7 +9,7 @@ class Copyright extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-copyright';
+		return 'grozomart-copyright';
 	}
 
 	public function get_title()

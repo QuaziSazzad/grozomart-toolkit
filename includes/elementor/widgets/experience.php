@@ -8,7 +8,7 @@ class Experience extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-experience';
+		return 'grozomart-experience';
 	}
 
 	public function get_title()

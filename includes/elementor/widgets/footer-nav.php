@@ -9,7 +9,7 @@ class Footer_Nav extends Widget_Base
 {
 	public function get_name()
 	{
-		return 'tekprof-footer-nav';
+		return 'grozomart-footer-nav';
 	}
 
 	public function get_title()

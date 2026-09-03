@@ -16,7 +16,7 @@ class Portfolio extends Widget_Base
 
 	public function get_name()
 	{
-		return 'tekprof-portfolio';
+		return 'grozomart-portfolio';
 	}
 
 	public function get_title()
