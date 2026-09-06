@@ -204,6 +204,7 @@ final class Grozomart_Toolkit
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-maintenance.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-admin-menu.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/utility.php';
+			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-shop-filter.php';
 
 
 			if (did_action('elementor/loaded')) {

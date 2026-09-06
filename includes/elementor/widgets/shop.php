@@ -12,6 +12,35 @@ class Shop extends Widget_Base
 
 		add_action('wp_enqueue_scripts', [$this, 'maybe_enqueue_quick_view_assets'], 20);
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_compare_icon_override'], 20);
+		add_action('wp_enqueue_scripts', [$this, 'register_filter_script'], 1);
+		add_action('elementor/frontend/after_register_scripts', [$this, 'register_filter_script']);
+	}
+
+	/**
+	 * Registers (but does not enqueue) the Layout Two AJAX filter script —
+	 * get_script_depends() enqueues it only on pages where this widget is
+	 * actually placed. It reuses GrozomartObject.ajax_url, localized onto
+	 * grozomart-addon in the toolkit's own assets class.
+	 *
+	 * Registered on both hooks because Elementor resolves get_script_depends()
+	 * during its own asset pass, which can run before wp_enqueue_scripts on
+	 * some requests; wp_register_script() ignores a handle already present,
+	 * so whichever fires first wins and the other is a no-op.
+	 */
+	public function register_filter_script()
+	{
+		wp_register_script(
+			'grozomart-shop-filter',
+			GROZOMART_TOOLKIT_ASSETS . '/js/shop-filter.js',
+			['jquery', 'grozomart-addon'],
+			GROZOMART_TOOLKIT_VERSION,
+			true
+		);
+	}
+
+	public function get_script_depends()
+	{
+		return ['grozomart-shop-filter'];
 	}
 
 	public function get_name()
@@ -58,6 +87,7 @@ class Shop extends Widget_Base
 				'default' => 'layout_one',
 				'options' => [
 					'layout_one' => __('Layout One', 'grozomart-toolkit'),
+					'layout_two' => __('Layout Two', 'grozomart-toolkit'),
 				]
 			]
 		);
@@ -65,6 +95,55 @@ class Shop extends Widget_Base
 		$this->end_controls_section();
 
 		include grozomart_get_elementor_option('shop-one-option.php');
+		include grozomart_get_elementor_option('shop-two-option.php');
+
+		//Modules — shared across every layout, registered once (not per-layout
+		// option file) since Elementor requires unique control IDs per widget.
+		$this->start_controls_section(
+			'layout_modules',
+			[
+				'label' => esc_html__('Product Card Modules', 'grozomart-toolkit'),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'module_wishlist',
+			[
+				'label' => esc_html__('Wishlist', 'grozomart-toolkit'),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'module_compare',
+			[
+				'label' => esc_html__('Compare', 'grozomart-toolkit'),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'module_quick_view',
+			[
+				'label' => esc_html__('Quick View', 'grozomart-toolkit'),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'yes',
+			]
+		);
+
+		$this->add_control(
+			'module_sale_badge',
+			[
+				'label' => esc_html__('Sale Badge', 'grozomart-toolkit'),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'default' => 'yes',
+			]
+		);
+
+		$this->end_controls_section();
 
 		//Content style
 		$this->start_controls_section(
@@ -75,9 +154,9 @@ class Shop extends Widget_Base
 			]
 		);
 
-		grozomart_elementor_style_options($this, 'Result Text', '{{WRAPPER}} .shop-notices-wrapper > p', ['layout_one']);
-		grozomart_elementor_style_options($this, 'Product Title', '{{WRAPPER}} .shop-card-items .title a, {{WRAPPER}} .shop-list-items-area-2 .title a', ['layout_one']);
-		grozomart_elementor_style_options($this, 'Product Price', '{{WRAPPER}} .price', ['layout_one']);
+		grozomart_elementor_style_options($this, 'Result Text', '{{WRAPPER}} .shop-notices-wrapper > p', ['layout_one', 'layout_two']);
+		grozomart_elementor_style_options($this, 'Product Title', '{{WRAPPER}} .shop-card-items .title a, {{WRAPPER}} .shop-list-items-area-2 .title a', ['layout_one', 'layout_two']);
+		grozomart_elementor_style_options($this, 'Product Price', '{{WRAPPER}} .price', ['layout_one', 'layout_two']);
 
 		$this->end_controls_section();
 	}
@@ -160,6 +239,9 @@ class Shop extends Widget_Base
 			'.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay{display:inline-block;width:40px;height:40px;line-height:40px;padding:0;gap:0;border-radius:7px}'
 			. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-columns{font-size:14px;line-height:40px}'
 			. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-columns:before{content:"\\e13a"}'
+			// Layout Two: fade the results while an AJAX filter is in flight.
+			. '.shop-filter-results{transition:opacity .2s ease}'
+			. '.shop-filter-results.is-loading{opacity:.45;pointer-events:none}'
 		);
 	}
 
@@ -198,5 +280,6 @@ class Shop extends Widget_Base
 		$this->prime_storzen_module_context($settings);
 
 		include grozomart_get_elementor_template('shop-one.php');
+		include grozomart_get_elementor_template('shop-two.php');
 	}
 }

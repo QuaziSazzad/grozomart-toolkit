@@ -72,6 +72,7 @@ class Grozomart_Elementor_Addon
 		include_once GROZOMART_TOOLKIT_ELEMENTOR . '/widgets/shop-banner.php';
 		include_once GROZOMART_TOOLKIT_ELEMENTOR . '/widgets/contact-info.php';
 		include_once GROZOMART_TOOLKIT_ELEMENTOR . '/widgets/shop.php';
+		include_once GROZOMART_TOOLKIT_ELEMENTOR . '/widgets/shop-details.php';
 		include_once GROZOMART_TOOLKIT_ELEMENTOR . '/widgets/product.php';
 		include_once GROZOMART_TOOLKIT_ELEMENTOR . '/widgets/full-footer.php';
 		include_once GROZOMART_TOOLKIT_ELEMENTOR . '/widgets/contact-form.php';
@@ -123,6 +124,7 @@ class Grozomart_Elementor_Addon
 		$widgets_manager->register(new Widgets\Shop_Banner());
 		$widgets_manager->register(new Widgets\Contact_Info());
 		$widgets_manager->register(new Widgets\Shop());
+		$widgets_manager->register(new Widgets\Shop_Details());
 		$widgets_manager->register(new Widgets\Product());
 		$widgets_manager->register(new Widgets\Full_Footer());
 		$widgets_manager->register(new Widgets\Contact_Form());
