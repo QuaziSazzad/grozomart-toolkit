@@ -92,6 +92,7 @@ class Shop_Details extends Widget_Base
 				'options' => [
 					'layout_one' => __('Layout One', 'grozomart-toolkit'),
 					'layout_two' => __('Layout Two', 'grozomart-toolkit'),
+					'layout_three' => __('Layout Three', 'grozomart-toolkit'),
 				]
 			]
 		);
@@ -100,6 +101,7 @@ class Shop_Details extends Widget_Base
 
 		include grozomart_get_elementor_option('shop-details-one-option.php');
 		include grozomart_get_elementor_option('shop-details-two-option.php');
+		include grozomart_get_elementor_option('shop-details-three-option.php');
 
 		//Modules — shared across every layout, registered once (not per-layout
 		// option file) since Elementor requires unique control IDs per widget.
@@ -158,10 +160,10 @@ class Shop_Details extends Widget_Base
 			]
 		);
 
-		grozomart_elementor_style_options($this, 'Product Title', '{{WRAPPER}} .shop-details-simple-content h2', ['layout_one', 'layout_two']);
-		grozomart_elementor_style_options($this, 'Product Price', '{{WRAPPER}} .shop-details-simple-content h3', ['layout_one', 'layout_two']);
-		grozomart_elementor_style_options($this, 'Tab Label', '{{WRAPPER}} .shop-tab-wrapper .nav-link', ['layout_one', 'layout_two']);
-		grozomart_elementor_style_options($this, 'Related Title', '{{WRAPPER}} .section-title-area .section-title h2', ['layout_one', 'layout_two']);
+		grozomart_elementor_style_options($this, 'Product Title', '{{WRAPPER}} .shop-details-simple-content h2', ['layout_one', 'layout_two', 'layout_three']);
+		grozomart_elementor_style_options($this, 'Product Price', '{{WRAPPER}} .shop-details-simple-content h3', ['layout_one', 'layout_two', 'layout_three']);
+		grozomart_elementor_style_options($this, 'Tab Label', '{{WRAPPER}} .shop-tab-wrapper .nav-link', ['layout_one', 'layout_two', 'layout_three']);
+		grozomart_elementor_style_options($this, 'Related Title', '{{WRAPPER}} .section-title-area .section-title h2', ['layout_one', 'layout_two', 'layout_three']);
 
 		$this->end_controls_section();
 	}
@@ -393,6 +395,44 @@ class Shop_Details extends Widget_Base
 				. '.grozomart-variation-form .woocommerce-variation-availability,'
 				. '.grozomart-variation-form .wc-no-matching-variations{margin-bottom:15px;color:#6B7280;font-size:14px}'
 				/**
+				 * Layout Two's wishlist/compare row is rendered by Storzen, so its
+				 * icons and labels are Storzen's, not this design's. Two gaps to
+				 * close without touching the plugin (which an update would undo,
+				 * and which would change these buttons everywhere else too):
+				 *
+				 * 1. Compare ships a `fa-columns` glyph; the design uses the
+				 *    rotate arrows. Swap the glyph via `content`, the same way the
+				 *    card overlays already do above.
+				 * 2. The wishlist button is icon-only — Storzen hard-codes it with
+				 *    no label option — so the text comes from ::after, taken from
+				 *    the button's own aria-label so it stays translated and flips
+				 *    to "Remove from wishlist" once added.
+				 */
+				. '.add-list-items .sz-compare-btn .fa-columns:before{content:"\\e13a"}'
+				. '.add-list-items .sz-wishlist-btn:after{content:attr(aria-label)}'
+				/**
+				 * Storzen's own button chrome (its pill padding/border) doesn't
+				 * belong in this row — the design shows plain icon+text links.
+				 */
+				/**
+				 * The theme styles this row as `.add-list-items a`, but Storzen
+				 * renders <button> — so those rules never applied. Mirror them
+				 * here (16px/500/7px gap, per the theme's own rule) and strip
+				 * Storzen's pill chrome so the buttons read as the design's plain
+				 * icon+text links.
+				 */
+				. '.add-list-items .sz-wishlist-btn,'
+				. '.add-list-items .sz-compare-btn{display:flex;align-items:center;gap:7px;font-size:16px;font-weight:500;color:inherit;padding:0;border:0;background:none;box-shadow:none;width:auto;height:auto;line-height:normal;cursor:pointer}'
+				. '.add-list-items .sz-wishlist-btn:hover,'
+				. '.add-list-items .sz-compare-btn:hover{color:var(--theme);background:none}'
+				/**
+				 * Both heart states are always in the DOM; Storzen normally shows
+				 * one via its own stylesheet, which isn't scoped to this row.
+				 */
+				. '.add-list-items .sz-wishlist-btn .sz-wishlist-btn__icon--filled{display:none}'
+				. '.add-list-items .sz-wishlist-btn.is-added .sz-wishlist-btn__icon{display:none}'
+				. '.add-list-items .sz-wishlist-btn.is-added .sz-wishlist-btn__icon--filled{display:inline-block}'
+				/**
 				 * WooCommerce prints the resolved variation's price and stock in
 				 * this container; without spacing it collides with the cart row.
 				 */
@@ -434,5 +474,6 @@ class Shop_Details extends Widget_Base
 
 		include grozomart_get_elementor_template('shop-details-one.php');
 		include grozomart_get_elementor_template('shop-details-two.php');
+		include grozomart_get_elementor_template('shop-details-three.php');
 	}
 }

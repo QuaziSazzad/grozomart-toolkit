@@ -120,6 +120,16 @@ $this->add_control(
 );
 
 $this->add_control(
+	'layout_two_product_one_title',
+	[
+		'label' => esc_html__('Product 1: Custom Title', 'grozomart-toolkit'),
+		'type' => \Elementor\Controls_Manager::TEXT,
+		'label_block' => true,
+		'description' => esc_html__('Overrides the title on this card. Leave empty to use the product title.', 'grozomart-toolkit'),
+	]
+);
+
+$this->add_control(
 	'layout_two_product_two',
 	[
 		'label'       => esc_html__('Product 2 (bottom of column 1)', 'grozomart-toolkit'),
@@ -140,6 +150,16 @@ $this->add_control(
 );
 
 $this->add_control(
+	'layout_two_product_two_title',
+	[
+		'label' => esc_html__('Product 2: Custom Title', 'grozomart-toolkit'),
+		'type' => \Elementor\Controls_Manager::TEXT,
+		'label_block' => true,
+		'description' => esc_html__('Overrides the title on this card. Leave empty to use the product title.', 'grozomart-toolkit'),
+	]
+);
+
+$this->add_control(
 	'layout_two_product_three',
 	[
 		'label'       => esc_html__('Product 3 (column 2, with countdown)', 'grozomart-toolkit'),
@@ -156,6 +176,16 @@ $this->add_control(
 		'type' => \Elementor\Controls_Manager::MEDIA,
 		'default' => [],
 		'description' => esc_html__('Overrides the product\'s own featured image. Leave empty to use the product image.', 'grozomart-toolkit'),
+	]
+);
+
+$this->add_control(
+	'layout_two_product_three_title',
+	[
+		'label' => esc_html__('Product 3: Custom Title', 'grozomart-toolkit'),
+		'type' => \Elementor\Controls_Manager::TEXT,
+		'label_block' => true,
+		'description' => esc_html__('Overrides the title on this card. Leave empty to use the product title.', 'grozomart-toolkit'),
 	]
 );
 
@@ -195,6 +225,16 @@ $this->add_control(
 		'type' => \Elementor\Controls_Manager::MEDIA,
 		'default' => [],
 		'description' => esc_html__('Overrides the product\'s own featured image. Leave empty to use the product image.', 'grozomart-toolkit'),
+	]
+);
+
+$this->add_control(
+	'layout_two_product_four_title',
+	[
+		'label' => esc_html__('Product 4: Custom Title', 'grozomart-toolkit'),
+		'type' => \Elementor\Controls_Manager::TEXT,
+		'label_block' => true,
+		'description' => esc_html__('Overrides the title on this card. Leave empty to use the product title.', 'grozomart-toolkit'),
 	]
 );
 

@@ -2,7 +2,7 @@
 
 use GrozomartToolkit\Helper\Grozomart_Shop_Filter;
 
-if ('layout_two' == $settings['layout_type']) :
+if ('layout_three' == $settings['layout_type']) :
 
     if (!class_exists('WooCommerce')) :
         if (current_user_can('manage_options')) :
@@ -18,7 +18,7 @@ if ('layout_two' == $settings['layout_type']) :
      * the same widget works both as a Single Product template part and as a
      * one-off block pointed at a specific product.
      */
-    $details_product_id = !empty($settings['layout_two_product']) ? absint($settings['layout_two_product']) : get_the_ID();
+    $details_product_id = !empty($settings['layout_three_product']) ? absint($settings['layout_three_product']) : get_the_ID();
     $details_product    = $details_product_id ? wc_get_product($details_product_id) : false;
 
     if (!$details_product instanceof WC_Product) :
@@ -76,7 +76,7 @@ if ('layout_two' == $settings['layout_type']) :
                     <?php woocommerce_output_all_notices(); ?>
                 </div>
             <?php endif; ?>
-            <?php if ('yes' === $settings['layout_two_show_breadcrumb']) : ?>
+            <?php if ('yes' === $settings['layout_three_show_breadcrumb']) : ?>
                 <div class="bread-list">
                     <p>
                         <a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'grozomart-toolkit'); ?></a>
@@ -99,7 +99,7 @@ if ('layout_two' == $settings['layout_type']) :
              * chosen. Without it those updates silently do nothing.
              */
             ?>
-            <div class="shop-details-simple-wrapper shop-details-two product">
+            <div class="shop-details-simple-wrapper shop-details-two shop-details-three product">
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="shop-details-left-item">
@@ -122,7 +122,7 @@ if ('layout_two' == $settings['layout_type']) :
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <?php if ('yes' === $settings['layout_two_show_gallery'] && count($details_image_ids) > 1) : ?>
+                            <?php if ('yes' === $settings['layout_three_show_gallery'] && count($details_image_ids) > 1) : ?>
                                 <ul class="nav">
                                     <?php foreach ($details_image_ids as $details_index => $details_image_id) : ?>
                                         <li class="nav-item">
@@ -176,9 +176,93 @@ if ('layout_two' == $settings['layout_type']) :
                             </h3>
 
                             <?php
+                            /**
+                             * Layout Three's per-item rows (thumbnail, title, quantity, price
+                             * with one shared Add to Cart) are exactly a WooCommerce grouped
+                             * product, so that's what drives them.
+                             *
+                             * WooCommerce posts a grouped product as `quantity[CHILD_ID]` with
+                             * `add-to-cart` set to the PARENT id, and treats a child left at 0
+                             * as simply not ordered — which is why the steppers start at 0 and
+                             * the minimum is 0 rather than 1.
+                             */
+                            $details_grouped_children = [];
+                            if ($details_product->is_type('grouped')) {
+                                foreach ($details_product->get_children() as $details_child_id) {
+                                    $details_child = wc_get_product($details_child_id);
+                                    if ($details_child instanceof WC_Product && $details_child->is_purchasable()) {
+                                        $details_grouped_children[] = $details_child;
+                                    }
+                                }
+                            }
+
+                            /**
+                             * Same price renderer the related-products block below uses (flat
+                             * <span>/<del> markup rather than WooCommerce's nested spans, which
+                             * would fight the design's font sizes). Set up here because the
+                             * grouped rows need it before that block runs.
+                             */
+                            $details_price_renderer = class_exists('\GrozomartToolkit\Helper\Grozomart_Shop_Filter')
+                                ? Grozomart_Shop_Filter::renderers()['price']
+                                : null;
+
                             $details_is_variable = $details_product->is_type('variable') && $details_product->is_purchasable() && $details_product->is_in_stock();
 
-                            if ($details_is_variable) :
+                            if (!empty($details_grouped_children)) :
+                            ?>
+                                <form class="cart grouped_form" action="<?php echo esc_url(apply_filters('woocommerce_add_to_cart_form_action', $details_product->get_permalink())); ?>" method="post" enctype="multipart/form-data">
+                                    <?php foreach ($details_grouped_children as $details_index => $details_child) : ?>
+                                        <?php
+                                        $details_child_id    = $details_child->get_id();
+                                        $details_child_image = $details_child->get_image_id();
+                                        ?>
+                                        <div class="shop-tshirt-item<?php echo 0 === $details_index % 2 ? '' : ' style-shirt'; ?>">
+                                            <div class="shirt-item">
+                                                <div class="shirt">
+                                                    <img src="<?php echo esc_url($details_child_image ? wp_get_attachment_image_url($details_child_image, 'woocommerce_gallery_thumbnail') : wc_placeholder_img_src('woocommerce_gallery_thumbnail')); ?>" alt="<?php echo esc_attr($details_child->get_name()); ?>">
+                                                </div>
+                                                <div class="shirt-content">
+                                                    <h4>
+                                                        <a href="<?php echo esc_url($details_child->get_permalink()); ?>"><?php echo esc_html($details_child->get_name()); ?></a>
+                                                    </h4>
+                                                    <?php if ($details_child->is_in_stock()) : ?>
+                                                        <div class="cart-quantity">
+                                                            <p class="qty">
+                                                                <button type="button" class="qtyminus" aria-hidden="true">&minus;</button>
+                                                                <input type="number"
+                                                                    name="<?php echo esc_attr('quantity[' . $details_child_id . ']'); ?>"
+                                                                    id="<?php echo esc_attr('qty-' . $details_uid . '-' . $details_child_id); ?>"
+                                                                    aria-label="<?php echo esc_attr(sprintf(/* translators: %s: product name */ __('Quantity of %s', 'grozomart-toolkit'), $details_child->get_name())); ?>"
+                                                                    min="<?php echo esc_attr(apply_filters('woocommerce_quantity_input_min', 0, $details_child)); ?>"
+                                                                    max="<?php echo esc_attr(0 < $details_child->get_max_purchase_quantity() ? $details_child->get_max_purchase_quantity() : ''); ?>"
+                                                                    step="1" value="0">
+                                                                <button type="button" class="qtyplus" aria-hidden="true">+</button>
+                                                            </p>
+                                                        </div>
+                                                    <?php else : ?>
+                                                        <p class="stock out-of-stock"><?php esc_html_e('Out of stock', 'grozomart-toolkit'); ?></p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                            <div class="prices-items">
+                                                <?php
+                                                if ($details_price_renderer) {
+                                                    $details_price_renderer($details_child);
+                                                } else {
+                                                    echo wp_kses_post($details_child->get_price_html());
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+
+                                    <button type="submit" class="theme-btn mb-4 w-100 text-center justify-content-center">
+                                        <?php echo esc_html($details_product->single_add_to_cart_text()); ?>
+                                    </button>
+                                    <input type="hidden" name="add-to-cart" value="<?php echo absint($details_id); ?>">
+                                </form>
+                            <?php elseif ($details_is_variable) : ?>
+                                <?php
                                 /**
                                  * Real WooCommerce variation form. wc-add-to-cart-variation.js
                                  * binds to `.variations select` inside `form.variations_form`
@@ -328,7 +412,7 @@ if ('layout_two' == $settings['layout_type']) :
                             <?php endif; ?>
 
                             <?php
-                            if ('yes' === $settings['layout_two_show_wishlist_row']) :
+                            if ('yes' === $settings['layout_three_show_wishlist_row']) :
                                 /**
                                  * Storzen's own buttons, not links to its pages. Its Compare and
                                  * Wishlist modules both hook `storzen_product_single_after_price`
@@ -358,10 +442,10 @@ if ('layout_two' == $settings['layout_type']) :
                             endif;
                             ?>
 
-                            <?php if (!empty($settings['layout_two_icon_items'])) : ?>
+                            <?php if (!empty($settings['layout_three_icon_items'])) : ?>
                                 <?php
                                 // The design shows these as two columns, so split the list in half.
-                                $details_icon_items  = $settings['layout_two_icon_items'];
+                                $details_icon_items  = $settings['layout_three_icon_items'];
                                 $details_icon_chunks = array_chunk($details_icon_items, (int) ceil(count($details_icon_items) / 2));
                                 ?>
                                 <div class="icon-items">
@@ -380,12 +464,12 @@ if ('layout_two' == $settings['layout_type']) :
                                 </div>
                             <?php endif; ?>
 
-                            <?php if ('yes' === $settings['layout_two_show_meta']) : ?>
+                            <?php if ('yes' === $settings['layout_three_show_meta']) : ?>
                                 <ul class="list border-0 pb-0">
-                                    <?php if (!empty($settings['layout_two_brand'])) : ?>
+                                    <?php if (!empty($settings['layout_three_brand'])) : ?>
                                         <li>
                                             <span class="style-one"><?php esc_html_e('Brand :', 'grozomart-toolkit'); ?></span>
-                                            <span><?php echo esc_html($settings['layout_two_brand']); ?></span>
+                                            <span><?php echo esc_html($settings['layout_three_brand']); ?></span>
                                         </li>
                                     <?php endif; ?>
                                     <?php if (!empty($details_cat_list)) : ?>
@@ -434,13 +518,13 @@ if ('layout_two' == $settings['layout_type']) :
         </div>
     </section>
 
-    <?php if ('yes' === $settings['layout_two_show_tabs']) :
+    <?php if ('yes' === $settings['layout_three_show_tabs']) :
 
         /**
          * Related products reuse the Shop widget's own card renderer so both
          * places produce identical markup from one implementation.
          */
-        $details_related_ids = wc_get_related_products($details_id, (int) $settings['layout_two_related_limit']);
+        $details_related_ids = wc_get_related_products($details_id, (int) $settings['layout_three_related_limit']);
         $details_renderers   = class_exists('\GrozomartToolkit\Helper\Grozomart_Shop_Filter') ? Grozomart_Shop_Filter::renderers() : [];
 
         $details_attributes = $details_product->get_attributes();
@@ -452,22 +536,22 @@ if ('layout_two' == $settings['layout_type']) :
                     <ul class="nav">
                         <li class="nav-item wow fadeInUp" data-wow-delay=".2s">
                             <a href="<?php echo esc_attr('#desc-' . $details_uid); ?>" data-bs-toggle="tab" class="nav-link active">
-                                <?php echo esc_html($settings['layout_two_description_label']); ?>
+                                <?php echo esc_html($settings['layout_three_description_label']); ?>
                             </a>
                         </li>
                         <li class="nav-item wow fadeInUp" data-wow-delay=".4s">
                             <a href="<?php echo esc_attr('#info-' . $details_uid); ?>" data-bs-toggle="tab" class="nav-link">
-                                <?php echo esc_html($settings['layout_two_additional_label']); ?>
+                                <?php echo esc_html($settings['layout_three_additional_label']); ?>
                             </a>
                         </li>
                         <li class="nav-item wow fadeInUp" data-wow-delay=".6s">
                             <a href="<?php echo esc_attr('#reviews-' . $details_uid); ?>" data-bs-toggle="tab" class="nav-link">
-                                <?php echo esc_html($settings['layout_two_reviews_label']); ?>
+                                <?php echo esc_html($settings['layout_three_reviews_label']); ?>
                             </a>
                         </li>
                         <li class="nav-item wow fadeInUp" data-wow-delay=".8s">
                             <a href="<?php echo esc_attr('#related-' . $details_uid); ?>" data-bs-toggle="tab" class="nav-link">
-                                <?php echo esc_html($settings['layout_two_related_label']); ?>
+                                <?php echo esc_html($settings['layout_three_related_label']); ?>
                             </a>
                         </li>
                     </ul>
@@ -476,7 +560,7 @@ if ('layout_two' == $settings['layout_type']) :
                             <div class="row g-4">
                                 <div class="decption-content">
                                     <h3 class="decption-title">
-                                        <?php echo esc_html(!empty($settings['layout_two_description_heading']) ? $settings['layout_two_description_heading'] : $details_product->get_name()); ?>
+                                        <?php echo esc_html(!empty($settings['layout_three_description_heading']) ? $settings['layout_three_description_heading'] : $details_product->get_name()); ?>
                                     </h3>
                                     <?php
                                     /**
@@ -486,8 +570,8 @@ if ('layout_two' == $settings['layout_type']) :
                                      * serialized page layout (post_content), which renders the
                                      * whole product page again inside this tab.
                                      */
-                                    if (!empty($settings['layout_two_description_text'])) {
-                                        echo wp_kses_post($settings['layout_two_description_text']);
+                                    if (!empty($settings['layout_three_description_text'])) {
+                                        echo wp_kses_post($settings['layout_three_description_text']);
                                     } else {
                                         $details_document = class_exists('\Elementor\Plugin')
                                             ? \Elementor\Plugin::$instance->documents->get($details_id)
@@ -504,14 +588,14 @@ if ('layout_two' == $settings['layout_type']) :
                                         }
                                     }
                                     ?>
-                                    <?php if (!empty($settings['layout_two_description_list'])) : ?>
+                                    <?php if (!empty($settings['layout_three_description_list'])) : ?>
                                         <?php
                                         /**
                                          * The design shows this list as two dotted columns, so
                                          * split the items in half rather than emitting one long
                                          * list.
                                          */
-                                        $details_dec_items  = $settings['layout_two_description_list'];
+                                        $details_dec_items  = $settings['layout_three_description_list'];
                                         $details_dec_chunks = array_chunk($details_dec_items, (int) ceil(count($details_dec_items) / 2));
                                         ?>
                                         <div class="dec-list">
@@ -715,10 +799,10 @@ if ('layout_two' == $settings['layout_type']) :
                         <div id="<?php echo esc_attr('related-' . $details_uid); ?>" class="tab-pane fade">
                             <div class="section-title-area">
                                 <div class="section-title">
-                                    <h2><?php echo esc_html($settings['layout_two_related_title']); ?></h2>
+                                    <h2><?php echo esc_html($settings['layout_three_related_title']); ?></h2>
                                 </div>
-                                <?php if (!empty($settings['layout_two_related_link']['url'])) : ?>
-                                    <a href="<?php echo esc_url($settings['layout_two_related_link']['url']); ?>" class="theme-btn small-btn"><?php esc_html_e('View All', 'grozomart-toolkit'); ?></a>
+                                <?php if (!empty($settings['layout_three_related_link']['url'])) : ?>
+                                    <a href="<?php echo esc_url($settings['layout_three_related_link']['url']); ?>" class="theme-btn small-btn"><?php esc_html_e('View All', 'grozomart-toolkit'); ?></a>
                                 <?php endif; ?>
                             </div>
                             <div class="best-seller-wrapper">

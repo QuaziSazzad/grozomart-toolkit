@@ -49,9 +49,11 @@
      * or, for the countdown slot, the whole feature-product-items-2 markup.
      * $custom_image_url, when set, overrides the product's own featured
      * image — lets an editor use different artwork for the promo card than
-     * the product's real listing photo.
+     * the product's real listing photo. $custom_title works the same way for
+     * the card's heading: set it to show shorter or campaign-specific wording,
+     * leave it empty to use the product's real title.
      */
-    $ftprod_render_card = function ($product_id, $wrapper_class, $countdown = null, $custom_image_url = '') use ($ftprod_render_overlay_icons, $ftprod_render_price) {
+    $ftprod_render_card = function ($product_id, $wrapper_class, $countdown = null, $custom_image_url = '', $custom_title = '') use ($ftprod_render_overlay_icons, $ftprod_render_price) {
         if (empty($product_id)) {
             return;
         }
@@ -62,6 +64,11 @@
 
         $main_image_id = $product->get_image_id();
         $image_url     = !empty($custom_image_url) ? $custom_image_url : ($main_image_id ? wp_get_attachment_image_url($main_image_id, 'woocommerce_thumbnail') : '');
+
+        // Only the visible heading is overridden; alt text and aria labels keep
+        // the real product name so the card stays identifiable to assistive
+        // tech and to anyone matching it against the catalogue.
+        $display_title = '' !== trim((string) $custom_title) ? $custom_title : $product->get_name();
 
         $discount_percent = 0;
         if ($product->is_on_sale() && is_numeric($product->get_regular_price()) && (float) $product->get_regular_price() > 0) {
@@ -115,7 +122,7 @@
                     <span><?php echo wp_kses_post(wp_strip_all_tags($product_cats)); ?></span>
                 <?php endif; ?>
                 <h2 class="title">
-                    <a href="<?php echo esc_url($product->get_permalink()); ?>"><?php echo esc_html($product->get_name()); ?></a>
+                    <a href="<?php echo esc_url($product->get_permalink()); ?>"><?php echo esc_html($display_title); ?></a>
                 </h2>
                 <?php if (wc_review_ratings_enabled()) : ?>
                     <div class="star">
@@ -167,8 +174,8 @@
             <div class="feature-product-wrapper">
                 <div class="row g-4 g-xl-0">
                     <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                        <?php $ftprod_render_card($settings['layout_two_product_one'], 'feature-product-items style-border', null, $settings['layout_two_product_one_image']['url'] ?? ''); ?>
-                        <?php $ftprod_render_card($settings['layout_two_product_two'], 'feature-product-items style-radius-none', null, $settings['layout_two_product_two_image']['url'] ?? ''); ?>
+                        <?php $ftprod_render_card($settings['layout_two_product_one'], 'feature-product-items style-border', null, $settings['layout_two_product_one_image']['url'] ?? '', $settings['layout_two_product_one_title'] ?? ''); ?>
+                        <?php $ftprod_render_card($settings['layout_two_product_two'], 'feature-product-items style-radius-none', null, $settings['layout_two_product_two_image']['url'] ?? '', $settings['layout_two_product_two_title'] ?? ''); ?>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
                         <?php
@@ -179,12 +186,13 @@
                                 'date' => $settings['layout_two_product_three_countdown_date'],
                                 'text' => $settings['layout_two_product_three_countdown_text'],
                             ],
-                            $settings['layout_two_product_three_image']['url'] ?? ''
+                            $settings['layout_two_product_three_image']['url'] ?? '',
+                            $settings['layout_two_product_three_title'] ?? ''
                         );
                         ?>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
-                        <?php $ftprod_render_card($settings['layout_two_product_four'], 'feature-product-items feature-product-items-four', null, $settings['layout_two_product_four_image']['url'] ?? ''); ?>
+                        <?php $ftprod_render_card($settings['layout_two_product_four'], 'feature-product-items feature-product-items-four', null, $settings['layout_two_product_four_image']['url'] ?? '', $settings['layout_two_product_four_title'] ?? ''); ?>
                         <div class="shop-banner-items11 bg-cover" style="background-image: url('<?php echo esc_url($settings['layout_two_promo_background_image']['url']); ?>');">
                             <div class="content">
                                 <?php if (!empty($settings['layout_two_promo_sub_title'])) : ?>

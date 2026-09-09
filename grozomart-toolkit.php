@@ -31,7 +31,7 @@ final class Grozomart_Toolkit
 	 * @since 1.0.0
 	 * @var string The Plugin version.
 	 */
-	const version = '1.0.0';
+	const version = '1.0.1';
 
 	/**
 	 * Minimum PHP Version
@@ -205,6 +205,7 @@ final class Grozomart_Toolkit
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-admin-menu.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/utility.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-shop-filter.php';
+			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-ajax-cart.php';
 
 
 			if (did_action('elementor/loaded')) {

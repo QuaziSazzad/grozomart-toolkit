@@ -62,6 +62,20 @@ if ('layout_one' == $settings['layout_type']) :
     <!-- Shop Section Start -->
     <section class="shop-details-section section-padding pb-0 fix">
         <div class="container">
+            <?php
+            /**
+             * WooCommerce prints "added to cart" (and any error) through
+             * woocommerce_output_all_notices, normally hooked to
+             * woocommerce_before_single_product. This widget replaces that
+             * template, so the hook never fires and the shopper got no feedback
+             * at all after adding to the cart. Print the notices here instead.
+             */
+            if (function_exists('woocommerce_output_all_notices')) :
+            ?>
+                <div class="woocommerce-notices-wrapper">
+                    <?php woocommerce_output_all_notices(); ?>
+                </div>
+            <?php endif; ?>
             <?php if ('yes' === $settings['layout_one_show_breadcrumb']) : ?>
                 <div class="bread-list">
                     <p>

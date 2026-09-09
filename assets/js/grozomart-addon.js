@@ -728,14 +728,40 @@
     });
 
     function GrozomartCartClickEvents() {
-		// h-btn-cart
-		$(".add_to_cart_button").on('click', function (e) {
-			e.preventDefault();
-
-			$('.widget-cart-wrap').addClass('cart-open');
+		/**
+		 * Only buttons that actually add to the cart in place carry
+		 * `ajax_add_to_cart` — WooCommerce adds it for simple, purchasable,
+		 * in-stock products. Variable and grouped products get a plain
+		 * `add_to_cart_button` whose href points at the product page, because
+		 * the shopper still has to pick options there.
+		 *
+		 * This previously bound to every `.add_to_cart_button` and called
+		 * preventDefault(), so "Select Options" was swallowed and the drawer
+		 * opened instead of the product page loading. Bind to the AJAX ones
+		 * only and let everything else navigate.
+		 *
+		 * Delegated from the document so cards rendered later (AJAX shop
+		 * filtering, Elementor previews) are covered too.
+		 */
+		$(document).on('click', '.add_to_cart_button.ajax_add_to_cart', function () {
+			// No preventDefault: WooCommerce's own handler needs this click to
+			// run the request. The drawer opens on added_to_cart below, once
+			// the item is really in the cart.
+			$('.widget-cart-wrap').data('grozomart-open-on-add', true);
 		});
 
-		$('.cart-close').on('click', function (e) {
+		/**
+		 * WooCommerce fires this on the body after a successful AJAX add, with
+		 * the refreshed cart fragments already swapped in — so the drawer shows
+		 * the new item rather than a stale cart.
+		 */
+		$(document.body).on('added_to_cart', function () {
+			if ($('.widget-cart-wrap').data('grozomart-open-on-add')) {
+				$('.widget-cart-wrap').removeData('grozomart-open-on-add').addClass('cart-open');
+			}
+		});
+
+		$(document).on('click', '.cart-close', function (e) {
 			e.preventDefault();
 
 			$('.widget-cart-wrap').removeClass('cart-open');
