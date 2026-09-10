@@ -289,6 +289,15 @@ class Grozomart_Shop_Filter
 			$query_args['meta_key'] = $sort['meta_key'];
 		}
 
+		/**
+		 * Optional keyword, used by the product search results page so it can
+		 * reuse this same query builder (and therefore the same filtering,
+		 * sorting and markup) rather than duplicating it.
+		 */
+		if (!empty($args['search'])) {
+			$query_args['s'] = $args['search'];
+		}
+
 		$query_args['tax_query'] = [
 			[
 				'taxonomy' => 'product_visibility',
