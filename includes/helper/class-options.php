@@ -216,71 +216,79 @@ class Grozomart_Options
 			],
 		]);
 
-		// CSF::createSection($this->options_prefix, [
-		// 	'parent' => 'general_options',
-		// 	'title'  => esc_html__('Back to Top', 'grozomart-toolkit'),
-		// 	'fields' => [
-		// 		[
-		// 			'type'    => 'heading',
-		// 			'content' => esc_html__('Back to Top', 'grozomart-toolkit'),
-		// 		],
-		// 		[
-		// 			'id'       => 'back_to_top',
-		// 			'type'     => 'button_set',
-		// 			'title'    => esc_html__('Back to Top', 'grozomart-toolkit'),
-		// 			'subtitle' => esc_html__('Add a back to top button on bottom right corner.', 'grozomart-toolkit'),
-		// 			'options'  => [
-		// 				'enabled'  => esc_html__('Enable', 'grozomart-toolkit'),
-		// 				'disabled' => esc_html__('Disable', 'grozomart-toolkit'),
-		// 			],
-		// 			'default'  => 'enabled',
-		// 		],
-		// 		[
-		// 			'id'         => 'back_to_top_mobile',
-		// 			'type'       => 'switcher',
-		// 			'title'      => esc_html__('Show on Mobile', 'grozomart-toolkit'),
-		// 			'subtitle'   => esc_html__('Show the back to top button on mobile devices..', 'grozomart-toolkit'),
-		// 			'default'    => true,
-		// 			'dependency' => ['back_to_top', '==', 'enabled'],
-		// 		],
-		// 		[
-		// 			'id'          => 'back_to_top_color',
-		// 			'type'        => 'color',
-		// 			'title'       => esc_html__('Icon Color', 'grozomart-toolkit'),
-		// 			'subtitle'    => esc_html__('Back to Top icon color', 'grozomart-toolkit'),
-		// 			'output'      => '.back-to-top',
-		// 			'output_mode' => 'color',
-		// 			'dependency'  => ['back_to_top', '==', 'enabled'],
-		// 		],
-		// 		[
-		// 			'id'          => 'back_to_top_bg',
-		// 			'type'        => 'color',
-		// 			'title'       => esc_html__('Background', 'grozomart-toolkit'),
-		// 			'subtitle'    => esc_html__('Back to Top icon background color', 'grozomart-toolkit'),
-		// 			'output'      => '.back-to-top',
-		// 			'output_mode' => 'background-color',
-		// 			'dependency'  => ['back_to_top', '==', 'enabled'],
-		// 		],
-		// 		[
-		// 			'id'          => 'back_top_hover_color',
-		// 			'type'        => 'color',
-		// 			'title'       => esc_html__('Hover Color', 'grozomart-toolkit'),
-		// 			'subtitle'    => esc_html__('Back to Top icon hover color', 'grozomart-toolkit'),
-		// 			'output'      => '.back-to-top:hover',
-		// 			'output_mode' => 'color',
-		// 			'dependency'  => ['back_to_top', '==', 'enabled'],
-		// 		],
-		// 		[
-		// 			'id'          => 'back_top_hover_bg',
-		// 			'type'        => 'color',
-		// 			'title'       => esc_html__('Hover Background', 'grozomart-toolkit'),
-		// 			'subtitle'    => esc_html__('Back to Top icon hover background color', 'grozomart-toolkit'),
-		// 			'output'      => '.back-to-top:hover',
-		// 			'output_mode' => 'background-color',
-		// 			'dependency'  => ['back_to_top', '==', 'enabled'],
-		// 		],
-		// 	],
-		// ]);
+		CSF::createSection($this->options_prefix, [
+			'parent' => 'general_options',
+			'title'  => esc_html__('Back to Top', 'grozomart-toolkit'),
+			'fields' => [
+				[
+					'type'    => 'heading',
+					'content' => esc_html__('Back to Top', 'grozomart-toolkit'),
+				],
+				[
+					'id'       => 'back_to_top',
+					'type'     => 'button_set',
+					'title'    => esc_html__('Back to Top', 'grozomart-toolkit'),
+					'subtitle' => esc_html__('Add a back to top button on bottom right corner.', 'grozomart-toolkit'),
+					'options'  => [
+						'enabled'  => esc_html__('Enable', 'grozomart-toolkit'),
+						'disabled' => esc_html__('Disable', 'grozomart-toolkit'),
+					],
+					'default'  => 'enabled',
+				],
+				[
+					'id'         => 'back_to_top_icon',
+					'type'       => 'icon',
+					'title'      => esc_html__('Icon', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Choose the icon shown inside the button.', 'grozomart-toolkit'),
+					'default'    => 'fa-regular fa-arrow-up',
+					'dependency' => ['back_to_top', '==', 'enabled'],
+				],
+				[
+					'id'         => 'back_to_top_mobile',
+					'type'       => 'switcher',
+					'title'      => esc_html__('Show on Mobile', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Show the back to top button on mobile devices.', 'grozomart-toolkit'),
+					'default'    => true,
+					'dependency' => ['back_to_top', '==', 'enabled'],
+				],
+				[
+					'id'          => 'back_to_top_color',
+					'type'        => 'color',
+					'title'       => esc_html__('Icon Color', 'grozomart-toolkit'),
+					'subtitle'    => esc_html__('Back to Top icon color', 'grozomart-toolkit'),
+					'output'      => '.back-to-top',
+					'output_mode' => 'color',
+					'dependency'  => ['back_to_top', '==', 'enabled'],
+				],
+				[
+					'id'          => 'back_to_top_bg',
+					'type'        => 'color',
+					'title'       => esc_html__('Background', 'grozomart-toolkit'),
+					'subtitle'    => esc_html__('Back to Top icon background color', 'grozomart-toolkit'),
+					'output'      => '.back-to-top',
+					'output_mode' => 'background-color',
+					'dependency'  => ['back_to_top', '==', 'enabled'],
+				],
+				[
+					'id'          => 'back_top_hover_color',
+					'type'        => 'color',
+					'title'       => esc_html__('Hover Color', 'grozomart-toolkit'),
+					'subtitle'    => esc_html__('Back to Top icon hover color', 'grozomart-toolkit'),
+					'output'      => '.back-to-top:hover',
+					'output_mode' => 'color',
+					'dependency'  => ['back_to_top', '==', 'enabled'],
+				],
+				[
+					'id'          => 'back_top_hover_bg',
+					'type'        => 'color',
+					'title'       => esc_html__('Hover Background', 'grozomart-toolkit'),
+					'subtitle'    => esc_html__('Back to Top icon hover background color', 'grozomart-toolkit'),
+					'output'      => '.back-to-top:hover',
+					'output_mode' => 'background-color',
+					'dependency'  => ['back_to_top', '==', 'enabled'],
+				],
+			],
+		]);
 	}
 
 	public function header_section()

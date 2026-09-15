@@ -268,12 +268,13 @@ class Grozomart_Metaboxes
 					'id'       => 'back_to_top_page',
 					'type'     => 'button_set',
 					'title'    => esc_html__('Back to Top', 'grozomart-toolkit'),
-					'subtitle' => esc_html__('Add a back to top button on bottom right corner.', 'grozomart-toolkit'),
+					'subtitle' => esc_html__('Override the global Back to Top setting for this page only.', 'grozomart-toolkit'),
 					'options'  => [
+						'default'  => esc_html__('Default', 'grozomart-toolkit'),
 						'enabled'  => esc_html__('Enable', 'grozomart-toolkit'),
 						'disabled' => esc_html__('Disable', 'grozomart-toolkit'),
 					],
-					'default'  => 'disabled',
+					'default'  => 'default',
 				],
 			],
 		]);
@@ -714,6 +715,24 @@ class Grozomart_Metaboxes
 				],
 			],
 		]);
+
+		CSF::createSection($this->post_prefix, [
+			'title'  => esc_html__('Back to Top', 'grozomart-toolkit'),
+			'fields' => [
+				[
+					'id'       => 'back_to_top_post',
+					'type'     => 'button_set',
+					'title'    => esc_html__('Back to Top', 'grozomart-toolkit'),
+					'subtitle' => esc_html__('Override the global Back to Top setting for this item only.', 'grozomart-toolkit'),
+					'options'  => [
+						'default'  => esc_html__('Default', 'grozomart-toolkit'),
+						'enabled'  => esc_html__('Enable', 'grozomart-toolkit'),
+						'disabled' => esc_html__('Disable', 'grozomart-toolkit'),
+					],
+					'default'  => 'default',
+				],
+			],
+		]);
 	}
 
 	public function portfolio_metaboxes()
@@ -947,6 +966,24 @@ class Grozomart_Metaboxes
 						'==',
 						'disabled',
 					],
+				],
+			],
+		]);
+
+		CSF::createSection($this->portfolio_prefix, [
+			'title'  => esc_html__('Back to Top', 'grozomart-toolkit'),
+			'fields' => [
+				[
+					'id'       => 'back_to_top_portfolio',
+					'type'     => 'button_set',
+					'title'    => esc_html__('Back to Top', 'grozomart-toolkit'),
+					'subtitle' => esc_html__('Override the global Back to Top setting for this item only.', 'grozomart-toolkit'),
+					'options'  => [
+						'default'  => esc_html__('Default', 'grozomart-toolkit'),
+						'enabled'  => esc_html__('Enable', 'grozomart-toolkit'),
+						'disabled' => esc_html__('Disable', 'grozomart-toolkit'),
+					],
+					'default'  => 'default',
 				],
 			],
 		]);
