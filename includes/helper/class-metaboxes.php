@@ -45,6 +45,7 @@ class Grozomart_Metaboxes
 		CSF::createMetabox($this->page_prefix, [
 			'title'        => esc_html__('Grozomart Page Options', 'grozomart-toolkit'),
 			'post_type'    => 'page',
+			'output_css'   => true,
 			'show_restore' => true,
 		]);
 
@@ -186,7 +187,7 @@ class Grozomart_Metaboxes
 					'id'         => 'page_title_bg',
 					'type'       => 'background',
 					'title'      => esc_html__('Background', 'grozomart-toolkit'),
-					'output'     => '.page-title-wrapper',
+					'output'     => '.breadcrumb-wrapper',
 					'dependency' => [
 						['page_title', '!=', 'disabled'],
 						['customize_page_title_style', '==', 'yes'],
@@ -196,7 +197,7 @@ class Grozomart_Metaboxes
 					'id'          => 'page_title_overly_color',
 					'type'        => 'color',
 					'title'       => esc_html__('Overly Color', 'grozomart-toolkit'),
-					'output'      => '.page-title-wrapper::before',
+					'output'      => '.breadcrumb-wrapper::before',
 					'output_mode' => 'background-color',
 					'dependency'  => [
 						['page_title', '!=', 'disabled'],
@@ -207,7 +208,7 @@ class Grozomart_Metaboxes
 					'id'               => 'page_title_typo',
 					'type'             => 'typography',
 					'title'            => esc_html__('Typography', 'grozomart-toolkit'),
-					'output'           => '.page-title-wrapper .page-title',
+					'output'           => '.breadcrumb-wrapper .breadcrumb-title',
 					'line_height_unit' => 'em',
 					'dependency'       => [
 						['page_title', '!=', 'disabled'],
@@ -218,7 +219,7 @@ class Grozomart_Metaboxes
 					'id'               => 'page_breadcrumb_typo',
 					'type'             => 'typography',
 					'title'            => esc_html__('Breadcrumb Typography', 'grozomart-toolkit'),
-					'output'           => '.page-title-wrapper .breadcrumb, .page-title-wrapper .breadcrumb a',
+					'output'           => '.breadcrumb-wrapper .breadcrumb-list, .breadcrumb-wrapper .breadcrumb-list a',
 					'line_height_unit' => 'em',
 					'dependency'       => [
 						['page_title', '!=', 'disabled'],
@@ -296,15 +297,13 @@ class Grozomart_Metaboxes
 						'disabled' => esc_html__('Disable', 'grozomart-toolkit'),
 					],
 					'default'  => 'disabled',
-
 				],
 				[
-					'id'       => 'primary_color',
-					'type'     => 'color',
-					'title'    => esc_html__('Primary', 'grozomart-toolkit'),
-					'default'  => '#FC5546',
-					'subtitle' => esc_html__('Your main brand color. Used by most elements throughout the website.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #FC5546', 'grozomart-toolkit'),
+					'id'         => 'theme_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Theme', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Your main brand color. Used by most elements throughout the website.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #064C50', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -312,12 +311,11 @@ class Grozomart_Metaboxes
 					],
 				],
 				[
-					'id'       => 'secondary_color',
-					'type'     => 'color',
-					'title'    => esc_html__('Secondary', 'grozomart-toolkit'),
-					'default'  => '#021433',
-					'subtitle' => esc_html__('Your secondary brand color. Used mainly as hover color or by secondary elements.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #021433', 'grozomart-toolkit'),
+					'id'         => 'theme2_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Theme 2', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('The accent color, used by buttons, highlights and hover states.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #BDEB69', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -325,12 +323,11 @@ class Grozomart_Metaboxes
 					],
 				],
 				[
-					'id'       => 'blue_color',
-					'type'     => 'color',
-					'title'    => esc_html__('Blue', 'grozomart-toolkit'),
-					'default'  => '#021433',
-					'subtitle' => esc_html__('Mostly Use in Background Color.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #021433', 'grozomart-toolkit'),
+					'id'         => 'header_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Heading', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('A dark, contrasting color, used by all headlines in your website.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #212529', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -338,12 +335,11 @@ class Grozomart_Metaboxes
 					],
 				],
 				[
-					'id'       => 'nav_blue_color',
-					'type'     => 'color',
-					'title'    => esc_html__('Nav Blue', 'grozomart-toolkit'),
-					'default'  => '#151F39',
-					'subtitle' => esc_html__('Mostly Use in Background Color.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #151F39', 'grozomart-toolkit'),
+					'id'         => 'text_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Text', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('A neutral grey, easy to read color, used by all text elements.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #6B7280', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -351,12 +347,11 @@ class Grozomart_Metaboxes
 					],
 				],
 				[
-					'id'       => 'body_color',
-					'type'     => 'color',
-					'title'    => esc_html__('Body', 'grozomart-toolkit'),
-					'default'  => '#5B5B5B',
-					'subtitle' => esc_html__('A neutral grey, easy to read color, used by all text elements.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #5B5B5B', 'grozomart-toolkit'),
+					'id'         => 'body_bg_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Body Background', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Background color of the page itself.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #FFFFFF', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -364,12 +359,11 @@ class Grozomart_Metaboxes
 					],
 				],
 				[
-					'id'       => 'heading_color',
-					'type'     => 'color',
-					'title'    => esc_html__('Heading', 'grozomart-toolkit'),
-					'default'  => '#0B0C0C',
-					'subtitle' => esc_html__('A dark, contrasting color, used by all headlines in your website.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #0B0C0C', 'grozomart-toolkit'),
+					'id'         => 'bg_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Section Background', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Generally used as background color for light, alternating sections.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #F5F2EC', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -377,12 +371,11 @@ class Grozomart_Metaboxes
 					],
 				],
 				[
-					'id'       => 'gray_color',
-					'type'     => 'color',
-					'title'    => esc_html__('Gray Color', 'grozomart-toolkit'),
-					'default'  => '#F3F6F9',
-					'subtitle' => esc_html__('A common light color for all Gray in your website.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #F3F6F9', 'grozomart-toolkit'),
+					'id'         => 'border_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Border', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Border color used on dark surfaces. Supports alpha (8-digit hex).', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #FFFFFF33', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -390,12 +383,23 @@ class Grozomart_Metaboxes
 					],
 				],
 				[
-					'id'       => 'light_neutral',
-					'type'     => 'color',
-					'title'    => esc_html__('Light Color', 'grozomart-toolkit'),
-					'default'  => '#F3F6F9',
-					'subtitle' => esc_html__('Generally used as background color for light, alternating sections.', 'grozomart-toolkit'),
-					'desc'     => esc_html__('Default: #F3F6F9', 'grozomart-toolkit'),
+					'id'         => 'white_color',
+					'type'       => 'color',
+					'title'      => esc_html__('White', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Used by text and icons placed on dark backgrounds.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #FFFFFF', 'grozomart-toolkit'),
+					'dependency' => [
+						'page_custom_color_scheme',
+						'==',
+						'enabled',
+					],
+				],
+				[
+					'id'         => 'black_color',
+					'type'       => 'color',
+					'title'      => esc_html__('Black', 'grozomart-toolkit'),
+					'subtitle'   => esc_html__('Pure black, used sparingly for maximum contrast.', 'grozomart-toolkit'),
+					'desc'       => esc_html__('Leave empty to keep the global color. Default: #000000', 'grozomart-toolkit'),
 					'dependency' => [
 						'page_custom_color_scheme',
 						'==',
@@ -495,6 +499,7 @@ class Grozomart_Metaboxes
 		CSF::createMetabox($this->post_prefix, [
 			'title'        => esc_html__('Grozomart Post Options', 'grozomart-toolkit'),
 			'post_type'    => 'post',
+			'output_css'   => true,
 			'show_restore' => true,
 		]);
 
@@ -638,7 +643,7 @@ class Grozomart_Metaboxes
 					'id'         => 'page_title_bg',
 					'type'       => 'background',
 					'title'      => esc_html__('Background', 'grozomart-toolkit'),
-					'output'     => '.page-title-wrapper',
+					'output'     => '.breadcrumb-wrapper',
 					'dependency' => [
 						['post_page_title', '!=', 'disabled'],
 						['customize_page_title_style', '==', 'yes'],
@@ -648,7 +653,7 @@ class Grozomart_Metaboxes
 					'id'          => 'post_title_overly_color',
 					'type'        => 'color',
 					'title'       => esc_html__('Overly Color', 'grozomart-toolkit'),
-					'output'      => '.page-title-wrapper::before',
+					'output'      => '.breadcrumb-wrapper::before',
 					'output_mode' => 'background-color',
 					'dependency'  => [
 						['post_page_title', '!=', 'disabled'],
@@ -659,7 +664,7 @@ class Grozomart_Metaboxes
 					'id'               => 'page_title_typo',
 					'type'             => 'typography',
 					'title'            => esc_html__('Typography', 'grozomart-toolkit'),
-					'output'           => '.page-title-wrapper .page-title',
+					'output'           => '.breadcrumb-wrapper .breadcrumb-title',
 					'line_height_unit' => 'em',
 					'dependency'       => [
 						['post_page_title', '!=', 'disabled'],
@@ -670,7 +675,7 @@ class Grozomart_Metaboxes
 					'id'               => 'page_breadcrumb_typo',
 					'type'             => 'typography',
 					'title'            => esc_html__('Breadcrumb Typography', 'grozomart-toolkit'),
-					'output'           => '.page-title-wrapper .breadcrumb, .page-title-wrapper .breadcrumb a',
+					'output'           => '.breadcrumb-wrapper .breadcrumb-list, .breadcrumb-wrapper .breadcrumb-list a',
 					'line_height_unit' => 'em',
 					'dependency'       => [
 						['post_page_title', '!=', 'disabled'],
@@ -740,6 +745,7 @@ class Grozomart_Metaboxes
 		CSF::createMetabox($this->portfolio_prefix, [
 			'title'        => esc_html__('Grozomart Portfolio Options', 'grozomart-toolkit'),
 			'post_type'    => 'grozomart_portfolio',
+			'output_css'   => true,
 			'show_restore' => true,
 		]);
 
@@ -882,7 +888,7 @@ class Grozomart_Metaboxes
 					'id'         => 'page_title_bg',
 					'type'       => 'background',
 					'title'      => esc_html__('Background', 'grozomart-toolkit'),
-					'output'     => '.page-title-wrapper',
+					'output'     => '.breadcrumb-wrapper',
 					'dependency' => [
 						['portfolio_page_title', '!=', 'disabled'],
 						['customize_page_title_style', '==', 'yes'],
@@ -892,7 +898,7 @@ class Grozomart_Metaboxes
 					'id'          => 'post_title_overly_color',
 					'type'        => 'color',
 					'title'       => esc_html__('Overly Color', 'grozomart-toolkit'),
-					'output'      => '.page-title-wrapper::before',
+					'output'      => '.breadcrumb-wrapper::before',
 					'output_mode' => 'background-color',
 					'dependency'  => [
 						['portfolio_page_title', '!=', 'disabled'],
@@ -903,7 +909,7 @@ class Grozomart_Metaboxes
 					'id'               => 'page_title_typo',
 					'type'             => 'typography',
 					'title'            => esc_html__('Typography', 'grozomart-toolkit'),
-					'output'           => '.page-title-wrapper .page-title',
+					'output'           => '.breadcrumb-wrapper .breadcrumb-title',
 					'line_height_unit' => 'em',
 					'dependency'       => [
 						['portfolio_page_title', '!=', 'disabled'],
@@ -914,7 +920,7 @@ class Grozomart_Metaboxes
 					'id'               => 'page_breadcrumb_typo',
 					'type'             => 'typography',
 					'title'            => esc_html__('Breadcrumb Typography', 'grozomart-toolkit'),
-					'output'           => '.page-title-wrapper .breadcrumb, .page-title-wrapper .breadcrumb a',
+					'output'           => '.breadcrumb-wrapper .breadcrumb-list, .breadcrumb-wrapper .breadcrumb-list a',
 					'line_height_unit' => 'em',
 					'dependency'       => [
 						['portfolio_page_title', '!=', 'disabled'],
