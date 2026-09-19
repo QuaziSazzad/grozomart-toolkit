@@ -41,7 +41,7 @@
     };
     ?>
     <!-- Footer Section Start -->
-    <footer class="footer-section fix">
+    <div class="footer-section fix">
         <div class="container">
             <div class="footer-top-wrapper">
                 <div class="newsletter-content wow fadeInUp" data-wow-delay=".3s">
@@ -173,5 +173,5 @@
                 <?php endif; ?>
             </div>
         </div>
-    </footer>
+    </div>
 <?php endif; ?>

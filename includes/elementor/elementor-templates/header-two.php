@@ -38,7 +38,7 @@ if ('layout_two' == $settings['layout_type']) :
     if (!empty($settings['layout_two_logo_size']['height'])) {
         $header_logo_dimensions .= ' height="' . esc_attr($settings['layout_two_logo_size']['height']) . '"';
     }
-    ?>
+?>
     <!-- Offcanvas Area Start -->
     <div class="fix-area">
         <div class="offcanvas__info">
@@ -47,7 +47,7 @@ if ('layout_two' == $settings['layout_type']) :
                     <div class="offcanvas__top d-flex justify-content-between align-items-center">
                         <div class="offcanvas__logo">
                             <a href="<?php echo esc_url(home_url('/')); ?>">
-                                <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>"<?php echo $header_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                                <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>" <?php echo $header_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                             </a>
                         </div>
                         <div class="offcanvas__close">
@@ -122,7 +122,7 @@ if ('layout_two' == $settings['layout_type']) :
     <div class="offcanvas__overlay"></div>
 
     <!-- Header Section Start -->
-    <header class="header-section-two">
+    <div class="header-section-two">
         <div class="header-top">
             <div class="container">
                 <div class="middle-list-items">
@@ -178,7 +178,7 @@ if ('layout_two' == $settings['layout_type']) :
         <div class="container">
             <div class="middle-wrap-items">
                 <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-                    <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>"<?php echo $header_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                    <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>" <?php echo $header_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                 </a>
                 <form class="search-box" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
                     <?php if (!empty($header_categories)) : ?>
@@ -229,7 +229,7 @@ if ('layout_two' == $settings['layout_type']) :
                 <div class="mega-menu-wrapper">
                     <div class="header-main">
                         <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-                            <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>"<?php echo $header_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                            <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>" <?php echo $header_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                         </a>
                         <?php if (!empty($header_categories)) : ?>
                             <div class="category-wrapper">
@@ -315,5 +315,5 @@ if ('layout_two' == $settings['layout_type']) :
                 </div>
             </div>
         </div>
-    </header>
+    </div>
 <?php endif; ?>

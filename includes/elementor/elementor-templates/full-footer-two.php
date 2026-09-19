@@ -16,7 +16,7 @@
         if (empty($title) && empty($links)) {
             return;
         }
-    ?>
+?>
         <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-6 wow fadeInUp" data-wow-delay="<?php echo esc_attr($wow_delay); ?>">
             <div class="footer-widget-items">
                 <?php if (!empty($title)) : ?>
@@ -41,7 +41,7 @@
     };
     ?>
     <!-- Footer Section Start -->
-    <footer class="footer-section-2 fix">
+    <div class="footer-section-2 fix">
         <div class="container">
             <div class="footer-widget-wrapper-2">
                 <div class="row g-4 justify-content-between">
@@ -50,7 +50,7 @@
                             <?php if (!empty($settings['layout_two_logo']['url'])) : ?>
                                 <div class="widget-head">
                                     <a href="<?php echo esc_url(home_url('/')); ?>">
-                                        <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>"<?php echo $footer_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                                        <img src="<?php echo esc_url($settings['layout_two_logo']['url']); ?>" <?php echo $footer_logo_dimensions; ?> alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                                     </a>
                                 </div>
                             <?php endif; ?>
@@ -149,5 +149,5 @@
                 <?php endif; ?>
             </div>
         </div>
-    </footer>
+    </div>
 <?php endif; ?>
