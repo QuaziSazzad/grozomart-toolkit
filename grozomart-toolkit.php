@@ -206,6 +206,7 @@ final class Grozomart_Toolkit
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/utility.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-shop-filter.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-ajax-cart.php';
+			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-wishlist.php';
 
 
 			if (did_action('elementor/loaded')) {
