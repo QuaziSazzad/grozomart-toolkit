@@ -200,7 +200,7 @@ final class Grozomart_Toolkit
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-options.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-metaboxes.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/functions.php';
-			include_once GROZOMART_TOOLKIT_INCLUDES . '/post-type/class-portfolio.php';
+			//include_once GROZOMART_TOOLKIT_INCLUDES . '/post-type/class-portfolio.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-maintenance.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/class-admin-menu.php';
 			include_once GROZOMART_TOOLKIT_INCLUDES . '/helper/utility.php';

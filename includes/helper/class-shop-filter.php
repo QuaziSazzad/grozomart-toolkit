@@ -106,6 +106,7 @@ class Grozomart_Shop_Filter
 		$bounds = self::price_bounds();
 
 		$selected_cats  = isset($request['product_cat']) ? array_filter(array_map('sanitize_title', (array) $request['product_cat'])) : [];
+		$selected_tags  = isset($request['product_tag']) ? array_filter(array_map('sanitize_title', (array) $request['product_tag'])) : [];
 		$selected_stock = isset($request['stock_status']) ? array_filter(array_map('sanitize_key', (array) $request['stock_status'])) : [];
 		$on_sale_only   = !empty($request['on_sale']) && '1' === (string) $request['on_sale'];
 		$selected_min   = isset($request['min_price']) ? max($bounds['floor'], (int) $request['min_price']) : $bounds['floor'];
@@ -118,6 +119,7 @@ class Grozomart_Shop_Filter
 			'paged'             => $paged,
 			'orderby_choice'    => $orderby_choice,
 			'selected_cats'     => $selected_cats,
+			'selected_tags'     => $selected_tags,
 			'widget_categories' => $widget_categories,
 			'selected_stock'    => $selected_stock,
 			'on_sale_only'      => $on_sale_only,
@@ -324,6 +326,14 @@ class Grozomart_Shop_Filter
 				'taxonomy' => 'product_cat',
 				'field'    => 'slug',
 				'terms'    => $args['widget_categories'],
+			];
+		}
+
+		if (!empty($args['selected_tags'])) {
+			$query_args['tax_query'][] = [
+				'taxonomy' => 'product_tag',
+				'field'    => 'slug',
+				'terms'    => $args['selected_tags'],
 			];
 		}
 

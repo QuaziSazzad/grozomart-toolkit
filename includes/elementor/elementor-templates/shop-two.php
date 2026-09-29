@@ -32,11 +32,20 @@ if ('layout_two' == $settings['layout_type']) :
         $shop_two_categories = [];
     }
 
+    $shop_two_tags = get_terms([
+        'taxonomy'   => 'product_tag',
+        'hide_empty' => true,
+    ]);
+    if (is_wp_error($shop_two_tags)) {
+        $shop_two_tags = [];
+    }
+
     $shop_two_bounds       = Grozomart_Shop_Filter::price_bounds();
     $shop_two_price_floor  = $shop_two_bounds['floor'];
     $shop_two_price_ceil   = $shop_two_bounds['ceil'];
 
     $shop_two_selected_cats  = isset($_GET['product_cat']) ? array_filter(array_map('sanitize_title', (array) wp_unslash($_GET['product_cat']))) : [];
+    $shop_two_selected_tags  = isset($_GET['product_tag']) ? array_filter(array_map('sanitize_title', (array) wp_unslash($_GET['product_tag']))) : [];
     $shop_two_selected_stock = isset($_GET['stock_status']) ? array_filter(array_map('sanitize_key', (array) wp_unslash($_GET['stock_status']))) : [];
     $shop_two_on_sale_only   = isset($_GET['on_sale']) && '1' === $_GET['on_sale'];
     $shop_two_selected_min   = isset($_GET['min_price']) ? max($shop_two_price_floor, (int) $_GET['min_price']) : $shop_two_price_floor;
@@ -57,6 +66,7 @@ if ('layout_two' == $settings['layout_type']) :
         'paged'             => $shop_two_paged,
         'orderby_choice'    => $shop_two_orderby_choice,
         'selected_cats'     => $shop_two_selected_cats,
+        'selected_tags'     => $shop_two_selected_tags,
         'widget_categories' => !empty($settings['layout_two_categories']) ? (array) $settings['layout_two_categories'] : [],
         'selected_stock'    => $shop_two_selected_stock,
         'on_sale_only'      => $shop_two_on_sale_only,
@@ -189,6 +199,27 @@ if ('layout_two' == $settings['layout_type']) :
                                                     <span class="checkmark"></span>
                                                     <?php esc_html_e('On Sale', 'grozomart-toolkit'); ?>
                                                 </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ('yes' === $settings['layout_two_show_tag_filter'] && !empty($shop_two_tags)) : ?>
+                                <div class="shop-sidebar-item active">
+                                    <div class="sidebar-header">
+                                        <div class="head-title"><?php esc_html_e('Product Tags', 'grozomart-toolkit'); ?></div>
+                                        <i class="fas fa-chevron-down toggle-icon"></i>
+                                    </div>
+                                    <div class="sidebar-content">
+                                        <div class="sidebar-inner">
+                                            <div class="checkbox-group">
+                                                <?php foreach ($shop_two_tags as $shop_two_tag) : ?>
+                                                    <label class="custom-checkbox">
+                                                        <input type="checkbox" name="product_tag[]" value="<?php echo esc_attr($shop_two_tag->slug); ?>" <?php checked(in_array($shop_two_tag->slug, $shop_two_selected_tags, true)); ?>>
+                                                        <span class="checkmark"></span>
+                                                        <?php echo esc_html($shop_two_tag->name); ?>
+                                                    </label>
+                                                <?php endforeach; ?>
                                             </div>
                                         </div>
                                     </div>

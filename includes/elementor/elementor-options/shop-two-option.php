@@ -90,6 +90,15 @@ $this->add_control(
 	]
 );
 
+$this->add_control(
+	'layout_two_show_tag_filter',
+	[
+		'label' => esc_html__('Show Product Tag Filter', 'grozomart-toolkit'),
+		'type' => \Elementor\Controls_Manager::SWITCHER,
+		'default' => 'yes',
+	]
+);
+
 $this->end_controls_section();
 
 //Toolbar
