@@ -208,8 +208,7 @@ class Product extends Widget_Base
 		wp_add_inline_style(
 			'grozomart-product-compare-icon',
 			'.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay{display:inline-block;width:40px;height:40px;line-height:40px;padding:0;gap:0;border-radius:7px}'
-			. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-columns{font-size:14px;line-height:40px}'
-			. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-columns:before{content:"\\e13a"}'
+			. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-code-compare{font-size:14px;line-height:40px}'
 		);
 	}
 

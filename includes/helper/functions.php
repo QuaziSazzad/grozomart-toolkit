@@ -743,30 +743,78 @@ if (!function_exists('grozomart_auto_add_product_to_cart')) {
 			return;
 		}
 
-		$auto_cart_status = isset($_GET['cart']) ? $_GET['cart'] : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only product lookup from a shareable link; adding to the cart is not a state change needing a nonce.
+		$auto_cart_status = isset($_GET['cart']) ? sanitize_text_field(wp_unslash($_GET['cart'])) : '';
 
-		if (!is_admin() && !empty($auto_cart_status)) {
-			$get_product = get_posts([
-				'title'     => $auto_cart_status,
-				'post_type' => 'product',
-			]);
-			$product_id = $get_product[0]->ID;
-			$found = false;
-			//check if product already in cart
-			if (sizeof(WC()->cart->get_cart()) > 0) {
-				foreach (WC()->cart->get_cart() as $cart_item_key => $values) {
-					$_product = $values['data'];
-					if ($_product->get_id() == $product_id)
-						$found = true;
-				}
-				// if product not found, add it
-				if (!$found)
-					WC()->cart->add_to_cart($product_id);
-			} else {
-				// if no products in cart, add it
-				WC()->cart->add_to_cart($product_id);
+		if (is_admin() || '' === $auto_cart_status || !function_exists('WC') || !WC()->cart) {
+			return;
+		}
+
+		/**
+		 * The links this reads carry the product slug (…/cart/?cart=my-product),
+		 * so look the product up by slug. A numeric value is accepted too, so
+		 * ?cart=165 keeps working.
+		 */
+		if (ctype_digit($auto_cart_status)) {
+			$product_id = absint($auto_cart_status);
+		} else {
+			$product = get_page_by_path($auto_cart_status, OBJECT, 'product');
+			$product_id = ($product instanceof WP_Post) ? (int) $product->ID : 0;
+		}
+
+		// Nothing matched, or the product is not purchasable — leave the cart alone.
+		if (!$product_id) {
+			return;
+		}
+
+		$product_object = wc_get_product($product_id);
+
+		if (!$product_object || !$product_object->is_purchasable() || !$product_object->is_in_stock()) {
+			return;
+		}
+
+		// Skip when it is already in the cart, so a refresh does not stack it up.
+		foreach (WC()->cart->get_cart() as $values) {
+			if (isset($values['data']) && $values['data']->get_id() === $product_id) {
+				return;
 			}
 		}
+
+		WC()->cart->add_to_cart($product_id);
 	}
+
 	add_action('template_redirect', 'grozomart_auto_add_product_to_cart');
+}
+
+if (! function_exists('grozomart_render_storzen_overlay_button')) {
+	/**
+	 * Runs one of Storzen's overlay-button callbacks and returns its markup
+	 * with the compare icon class corrected.
+	 *
+	 * Storzen hard-codes `fas fa-columns` (its icon map offers no other
+	 * option and there is no filter). `fa-columns` is the Font Awesome 5
+	 * name; this theme bundles Font Awesome 6, where that icon was renamed,
+	 * so the class resolves to nothing and the button renders empty. Swap it
+	 * for `fa-solid fa-code-compare`, which is the icon the design uses.
+	 *
+	 * @param callable    $callback Storzen overlay callback.
+	 * @param \WC_Product $product  Product being rendered.
+	 * @return string Button markup.
+	 */
+	function grozomart_render_storzen_overlay_button($callback, $product)
+	{
+		ob_start();
+		call_user_func($callback, $product);
+		$markup = ob_get_clean();
+
+		if (false === strpos($markup, 'fa-columns')) {
+			return $markup;
+		}
+
+		return str_replace(
+			['fas fa-columns', 'fa-solid fa-columns'],
+			'fa-solid fa-code-compare',
+			$markup
+		);
+	}
 }

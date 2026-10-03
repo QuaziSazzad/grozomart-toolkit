@@ -236,8 +236,7 @@ class Shop_Details extends Widget_Base
 		wp_add_inline_style(
 			'grozomart-shop-details-compare-icon',
 			'.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay{display:inline-block;width:40px;height:40px;line-height:40px;padding:0;gap:0;border-radius:7px}'
-				. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-columns{font-size:14px;line-height:40px}'
-				. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-columns:before{content:"\\e13a"}'
+				. '.gt-shop-icon .sz-compare-btn.sz-compare-btn--overlay .fa-code-compare{font-size:14px;line-height:40px}'
 		);
 	}
 
@@ -408,7 +407,6 @@ class Shop_Details extends Widget_Base
 				 *    the button's own aria-label so it stays translated and flips
 				 *    to "Remove from wishlist" once added.
 				 */
-				. '.add-list-items .sz-compare-btn .fa-columns:before{content:"\\e13a"}'
 				. '.add-list-items .sz-wishlist-btn:after{content:attr(aria-label)}'
 				/**
 				 * Storzen's own button chrome (its pill padding/border) doesn't

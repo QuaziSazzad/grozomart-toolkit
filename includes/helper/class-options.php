@@ -959,6 +959,17 @@ class Grozomart_Options
 				],
 				[
 					'type'    => 'subheading',
+					'content' => esc_html__('Product Details', 'grozomart-toolkit'),
+				],
+				[
+					'id'       => 'product_hide_page_title',
+					'type'     => 'switcher',
+					'title'    => esc_html__('Hide Page Title', 'grozomart-toolkit'),
+					'subtitle' => esc_html__('Hide the page title banner (heading and breadcrumb) on single product pages. The breadcrumb inside the product details is not affected.', 'grozomart-toolkit'),
+					'default'  => false,
+				],
+				[
+					'type'    => 'subheading',
 					'content' => esc_html__('Related Product', 'grozomart-toolkit'),
 				],
 				[

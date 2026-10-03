@@ -28,9 +28,8 @@
             }
         }
         foreach (array_reverse($callbacks_list) as $callback_function) {
-            echo '<li>';
-            call_user_func($callback_function, $product);
-            echo '</li>';
+            // Escaped by Storzen; the helper only rewrites the icon class.
+            echo '<li>' . grozomart_render_storzen_overlay_button($callback_function, $product) . '</li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
     };
 

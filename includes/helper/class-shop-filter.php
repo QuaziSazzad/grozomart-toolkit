@@ -387,6 +387,36 @@ class Grozomart_Shop_Filter
 	 *
 	 * @return array<string,callable>
 	 */
+	/**
+	 * Bootstrap column classes for one product card on the desktop grid.
+	 *
+	 * Driven by the theme options' Shop > Columns setting so this grid and
+	 * WooCommerce's own loop (which reads the same option through
+	 * `loop_shop_columns`) stay in step. Bootstrap's grid is 12 wide, so only
+	 * the divisors of 12 map cleanly; 5 columns has no whole-number class and
+	 * falls back to 3, matching what the markup was built for.
+	 *
+	 * @return string
+	 */
+	public static function grid_column_class()
+	{
+		$columns = 3;
+
+		if (class_exists('\GrozomartTheme\Classes\Grozomart_Helper')) {
+			$columns = (int) \GrozomartTheme\Classes\Grozomart_Helper::get_option('product_loop_columns', 3);
+		}
+
+		$map = [
+			1 => 'col-xl-12 col-lg-12 col-md-12 col-sm-12',
+			2 => 'col-xl-6 col-lg-6 col-md-6 col-sm-6',
+			3 => 'col-xl-4 col-lg-6 col-md-6 col-sm-6',
+			4 => 'col-xl-3 col-lg-4 col-md-6 col-sm-6',
+			6 => 'col-xl-2 col-lg-3 col-md-4 col-sm-6',
+		];
+
+		return isset($map[$columns]) ? $map[$columns] : $map[3];
+	}
+
 	public static function renderers()
 	{
 		/**
@@ -409,9 +439,8 @@ class Grozomart_Shop_Filter
 				}
 			}
 			foreach (array_reverse($callbacks_flat) as $callback_function) {
-				echo '<li>';
-				call_user_func($callback_function, $product);
-				echo '</li>';
+				// Escaped by Storzen; the helper only rewrites the icon class.
+				echo '<li>' . grozomart_render_storzen_overlay_button($callback_function, $product) . '</li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 		};
 
@@ -442,7 +471,7 @@ class Grozomart_Shop_Filter
 				$discount_percent = round((((float) $product->get_regular_price() - (float) $product->get_sale_price()) / (float) $product->get_regular_price()) * 100);
 			}
 ?>
-			<div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+			<div class="<?php echo esc_attr(self::grid_column_class()); ?>">
 				<div class="shop-card-items">
 					<div class="thumb">
 						<?php if ($main_image_id) : ?>
